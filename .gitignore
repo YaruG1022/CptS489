@@ -1,0 +1,28 @@
+# don't include giant modules file 
+node_modules/
+
+# don't include sensitive info
+.env
+.env.local
+.env.*.local
+
+# os specific files
+.DS_Store
+.DS_Store?
+Thumbs.db
+
+# don't include IDE junk
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# don't include log files
+*.log
+npm-debug.log*
+logs/
+
+# don't include temporary files 
+*.tmp
+.cache/
