@@ -51,13 +51,15 @@ body {
 }
 
 .sidebar-container {
-    width: 85px;
-    height: 100vh;
-    padding: 20px 0px 0px 0px;
-    background-color: var(--sage-green-secondary); /* i'm thinking this might not stay green but it is for now */
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 85px;
+    height: 150vh;
+    overflow: hidden;
+    padding: 20px 0px 0px 0px;
+    background-color: var(--sage-green-secondary); /* i'm thinking this might not stay green but it is for now */
+    
 }
 
 .sidebar-nav{
@@ -79,7 +81,7 @@ body {
     margin: 0px;
     width: 100%;
     height: 100vh;
-    background-image: url(/assets/family-dinner-img.jpg);
+    background-image: url(./assets/family-dinner-img.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -116,4 +118,116 @@ body {
 
 #hero-login-button:hover {
     background-color: var(--golden-yellow-secondary);
+}
+
+.main-box {
+    display: flex;
+}
+
+.dashboard-container {
+    display: flex;
+    justify-content: left;
+    margin: 0px;
+    width: 100%;
+    height: 100vh;
+
+}
+
+.analytics-container {
+    padding: 10px;
+    margin: 20px;
+}
+
+.card-container {
+    margin: 10px 0px 10px 0px;
+}
+
+.analytics-container h2 {
+    margin-bottom: 5px;
+}
+
+.analytics-container a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#recent-activity-heading {
+    margin-left: 5px;
+}
+
+.card {
+    width: 12rem;
+    margin: 20px 20px 20px 20px;
+    padding: 0px;
+    border: none;
+    border-radius: 5px;
+}
+
+
+.card:hover {
+    box-shadow: lightgray 5px 5px 10px 1px;
+}
+
+.data-card-icon {
+    width: 15%;
+    margin: 15px 10px 15px 0;
+}
+
+.table-container{
+    margin: 0px 50px 10px 20px; 
+}
+
+
+tbody tr:hover {
+    background-color: var(--golden-yellow-secondary);
+    cursor: pointer;
+}
+
+#userDetailModal {
+    padding: 10px;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+#close-modal-btn {
+    background-color: var(--burnt-orange-primary);
+    color: var(--cream-primary);
+    border: none;
+}
+
+.user-status-badge {
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    font-size: small;
+    font-family: "Poppins", sans-serif;
+}
+
+.status-active {
+    background-color: var(--sage-green-secondary); 
+    color: var(--cream-primary); 
+}
+.status-suspended { 
+    background-color: var(--golden-yellow-secondary); 
+    color: var(--charcoal-gray-secondary); 
+}
+.status-banned { 
+    background-color: var(--burnt-orange-primary); 
+    color: var(--cream-primary); 
+}
+
+
+.nav-tabs .nav-link{
+    color: var(--charcoal-gray-secondary);
+    border: none;
+}
+
+.nav-tabs .nav-link.active{
+    background-color: var(--burnt-orange-primary);
+    color: var(--cream-primary);
+}
+
+.under-construction {
+    width: 100px;
 }
