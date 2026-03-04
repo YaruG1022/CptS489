@@ -16,11 +16,14 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a href="#" class="navbar-brand">
+            <a href="../src/index.html" class="navbar-brand">
                 <img id="navbar-logo-img" src="../assets/homeplate-logo-transparent.png" alt="">
                 <h1 id="navbar-header-text">HomePlate</h1>
             </a>
-            
+
+            <a class="nav-item nav-link m-2" id="logout-nav-button" href="../src/admin-dashboard.html">
+                Back to dash
+            </a>
         </div>
     </nav>
 
@@ -32,11 +35,14 @@
         <div class="sidebar-container">
             <nav class="sidebar-nav">
                 <!-- sidebar links + tooltips -->
-                <a href="#">
-                    <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Messages" src="../assets/envelope-icon.png" alt="">
+                <a href="../src/admin-dashboard.html">
+                    <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard Home" src="../assets/home-icon.png" alt="">
+                </a>
+                <a href="../src/vendor-applications.html">
+                    <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Vendor Applications" src="../assets/applications-icon.png" alt="">
                 </a>
                 <a href="#">
-                    <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Analytics" src="../assets/chart-icon.png" alt="">
+                    <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Revenue" src="../assets/revenue-icon.png" alt="">
                 </a>
                 <a href="../src/manage-user.html">
                     <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="User Management" src="../assets/users-icon.png" alt="">
@@ -48,7 +54,7 @@
         </div>
 
         <!-- container for main dashboard content -->
-        <div class="dashboard-container">
+        <div class="container-fluid table-container">
 
             <!-- container for all the cards present -->
             <div class="analytics-container">

@@ -26,3 +26,5 @@ logs/
 # don't include temporary files 
 *.tmp
 .cache/
+package.json
+package-lock.json

@@ -34,6 +34,23 @@ body {
     z-index: 100; /* z value allows it to go over all other page elements */
 }
 
+/* currently says back to dash but this is the logout button */
+#logout-nav-button {
+    padding: 5px 15px 5px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--burnt-orange-primary);
+    color: var(--cream-primary);
+    font-family: "Poppins", sans-serif;
+    font-size: medium;
+}
+
+#logout-nav-button:hover {
+    background-color: var(--golden-yellow-secondary);
+    color: var(--charcoal-gray-secondary);
+}
+
 #navbar-header-text {
     font-size: xxl-large; /* compiler says this isn't a real value but it works? */
     color: var(--cream-primary);
@@ -50,16 +67,19 @@ body {
     gap: 10px;
 }
 
+/* I fixed this because it was changing sizes between pages so it's set at a max width */
 .sidebar-container {
     display: flex;
+    height: auto;
+    min-height: 100%;
     flex-direction: column;
     align-items: center;
-    width: 85px;
-    height: 150vh;
+    min-width: 85px;
+    max-width: 85px;
     overflow: hidden;
     padding: 20px 0px 0px 0px;
     background-color: var(--sage-green-secondary); /* i'm thinking this might not stay green but it is for now */
-    
+
 }
 
 .sidebar-nav{
@@ -86,6 +106,7 @@ body {
     background-position: center;
 }
 
+/* INDEX PAGE STUFF ------------------------------------------------------------------------------- */
 #hero-img-center-box {
     background-color:  rgba(250, 243, 232, 0.9); /* this color is the same value as cream used throughout but + an alpha value */
     padding: 30px 40px;
@@ -120,19 +141,20 @@ body {
     background-color: var(--golden-yellow-secondary);
 }
 
+/* ------------------------------------------------------------------------------------------------- */
+
+/* main container for all pages */ 
 .main-box {
     display: flex;
+    min-height: 100vh;
+    align-items: stretch;
 }
 
-.dashboard-container {
-    display: flex;
-    justify-content: left;
-    margin: 0px;
-    width: 100%;
-    height: 100vh;
-
+.table-container{
+    margin: 0px 50px 10px 20px; 
 }
 
+/* ADMIN DASHBOARD STUFF  -------------------------------------------------------------------------- */
 .analytics-container {
     padding: 10px;
     margin: 20px;
@@ -163,7 +185,6 @@ body {
     border-radius: 5px;
 }
 
-
 .card:hover {
     box-shadow: lightgray 5px 5px 10px 1px;
 }
@@ -173,18 +194,17 @@ body {
     margin: 15px 10px 15px 0;
 }
 
-.table-container{
-    margin: 0px 50px 10px 20px; 
-}
+/* --------------------------------------------------------------------------------------------- */
 
+
+/* TABLE + TAB SET UP FOR MANAGING USERS AND APPLICATIONS ---------------------------------------------*/
+.table td {
+    padding: 10px;
+}
 
 tbody tr:hover {
-    background-color: var(--golden-yellow-secondary);
+    background-color: rgba(242, 239, 230, 0.548);
     cursor: pointer;
-}
-
-#userDetailModal {
-    padding: 10px;
 }
 
 .modal-body {
@@ -197,13 +217,30 @@ tbody tr:hover {
     border: none;
 }
 
+.nav-tabs .nav-link{
+    color: var(--charcoal-gray-secondary);
+    border: none;
+    background-color: #f0eeea;
+}
+
+.nav-tabs .nav-link.active{
+    background-color: var(--burnt-orange-primary);
+    color: var(--cream-primary);
+
+}
+
+.tab-content {
+    background-color: white;
+    border-radius: 2px;
+}
+
+/* BADGES FOR USER STATUS ------------------------------*/ 
 .user-status-badge {
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     font-size: small;
     font-family: "Poppins", sans-serif;
 }
-
 .status-active {
     background-color: var(--sage-green-secondary); 
     color: var(--cream-primary); 
@@ -216,18 +253,32 @@ tbody tr:hover {
     background-color: var(--burnt-orange-primary); 
     color: var(--cream-primary); 
 }
+/* ----------------------------------------- */
 
-
-.nav-tabs .nav-link{
-    color: var(--charcoal-gray-secondary);
-    border: none;
+/* BADGES FOR APPLICATION STATUS --------------*/ 
+.app-status-badge {
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    font-size: small;
+    font-family: "Poppins", sans-serif;
 }
-
-.nav-tabs .nav-link.active{
-    background-color: var(--burnt-orange-primary);
+.app-status-approved {
+    background-color: var(--sage-green-secondary); 
+    color: var(--cream-primary); 
+}
+.app-status-rejected { 
+    background-color: var(--burnt-orange-primary); 
     color: var(--cream-primary);
 }
+.app-status-pending { 
+    background-color: var(--golden-yellow-secondary); 
+    color: var(--charcoal-gray-secondary); 
+}
+/* ----------------------------------------- */
 
+
+/* just to have something there for the time being */
 .under-construction {
     width: 100px;
 }
+
