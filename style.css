@@ -108,6 +108,7 @@ body {
 }
 
 #hero-login-button {
+    display: inline-block;
     padding: 5px 15px 5px 15px;
     margin: 5px;
     border: none;
@@ -116,8 +117,29 @@ body {
     color: var(--cream-primary);
     font-family: "Poppins", sans-serif;
     font-size: large;
+    text-decoration: none;
 }
 
 #hero-login-button:hover {
     background-color: var(--golden-yellow-secondary);
+    text-decoration: none;
+}
+
+#hero-register-button {
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 5px;
+    border: 2px solid var(--burnt-orange-primary);
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--burnt-orange-primary);
+    font-family: "Poppins", sans-serif;
+    font-size: large;
+    text-decoration: none;
+}
+
+#hero-register-button:hover {
+    background-color: var(--burnt-orange-primary);
+    color: var(--cream-primary);
+    text-decoration: none;
 }
