@@ -51,13 +51,17 @@ body {
 }
 
 .sidebar-container {
-    width: 85px;
-    height: 100vh;
+    width: 68px;
+    height: calc(100vh - 56px);
     padding: 20px 0px 0px 0px;
     background-color: var(--sage-green-secondary); /* i'm thinking this might not stay green but it is for now */
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    z-index: 50;
 }
 
 .sidebar-nav{
