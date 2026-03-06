@@ -51,13 +51,17 @@ body {
 }
 
 .sidebar-container {
-    width: 85px;
-    height: 100vh;
+    width: 68px;
+    height: calc(100vh - 56px);
     padding: 20px 0px 0px 0px;
     background-color: var(--sage-green-secondary); /* i'm thinking this might not stay green but it is for now */
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    z-index: 50;
 }
 
 .sidebar-nav{
@@ -104,6 +108,7 @@ body {
 }
 
 #hero-login-button {
+    display: inline-block;
     padding: 5px 15px 5px 15px;
     margin: 5px;
     border: none;
@@ -112,8 +117,29 @@ body {
     color: var(--cream-primary);
     font-family: "Poppins", sans-serif;
     font-size: large;
+    text-decoration: none;
 }
 
 #hero-login-button:hover {
     background-color: var(--golden-yellow-secondary);
+    text-decoration: none;
+}
+
+#hero-register-button {
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 5px;
+    border: 2px solid var(--burnt-orange-primary);
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--burnt-orange-primary);
+    font-family: "Poppins", sans-serif;
+    font-size: large;
+    text-decoration: none;
+}
+
+#hero-register-button:hover {
+    background-color: var(--burnt-orange-primary);
+    color: var(--cream-primary);
+    text-decoration: none;
 }

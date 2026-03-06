@@ -1,0 +1,160 @@
+<!-- ================================================================
+     customer-reviews.html  —  fragment for customer-dashboard.html
+     ================================================================ -->
+
+<!-- Write a Review -->
+<div class="section-card mb-4">
+    <h2 class="section-title"><i class="bi bi-pencil-square me-2"></i>Write a Review</h2>
+
+    <form onsubmit="return false;">
+        <!-- Order selector -->
+        <div class="mb-3">
+            <label class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:600;">Select an Order</label>
+            <select class="form-select" style="font-family:'Open Sans',sans-serif;font-size:0.9rem;" id="reviewOrderSelect" onchange="updateOrderPreview(this)">
+                <option value="">— Choose an order to review —</option>
+                <option value="maria">Grandma Maria's Kitchen · Mar 2 · Lasagna, Curry, Tart</option>
+                <option value="priya">Spice Route by Priya · Feb 24 · Chicken Tikka, Naan</option>
+                <option value="jin">Seoul Bowl by Jin · Feb 17 · Bibimbap Bowl</option>
+            </select>
+        </div>
+
+        <!-- Order preview -->
+        <div id="orderPreview" class="mb-3 p-3 rounded" style="background:var(--cream-primary);display:none;">
+            <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.93rem;" id="previewRestaurant"></div>
+            <div style="font-family:'Open Sans',sans-serif;font-size:0.84rem;color:#666;" id="previewItems"></div>
+        </div>
+
+        <!-- Star rating -->
+        <div class="mb-3">
+            <label class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:600;">Your Rating</label>
+            <div class="star-rating">
+                <input type="radio" name="rating" id="r5" value="5"><label for="r5"><i class="bi bi-star-fill"></i></label>
+                <input type="radio" name="rating" id="r4" value="4"><label for="r4"><i class="bi bi-star-fill"></i></label>
+                <input type="radio" name="rating" id="r3" value="3"><label for="r3"><i class="bi bi-star-fill"></i></label>
+                <input type="radio" name="rating" id="r2" value="2"><label for="r2"><i class="bi bi-star-fill"></i></label>
+                <input type="radio" name="rating" id="r1" value="1"><label for="r1"><i class="bi bi-star-fill"></i></label>
+            </div>
+        </div>
+
+        <!-- Review text -->
+        <div class="mb-3">
+            <label for="reviewText" class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:600;">Your Review</label>
+            <textarea id="reviewText" class="form-control" rows="4" placeholder="Tell others about the food, portions, and cook…" style="font-family:'Open Sans',sans-serif;font-size:0.9rem;border-color:#ddd;"></textarea>
+        </div>
+
+        <!-- Image upload -->
+        <div class="mb-4">
+            <label class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:600;">Add Photos <span style="font-weight:400;color:#999;">(optional)</span></label>
+            <div class="upload-zone" onClick="document.getElementById('photoUpload').click()">
+                <i class="bi bi-camera" style="font-size:1.8rem;color:#bbb;display:block;text-align:center;margin-bottom:8px;"></i>
+                <div style="font-family:'Poppins',sans-serif;font-size:0.88rem;color:#aaa;text-align:center;">Click or drag photos here</div>
+                <div style="font-family:'Open Sans',sans-serif;font-size:0.78rem;color:#bbb;text-align:center;margin-top:4px;">JPG, PNG up to 5 MB each</div>
+                <input type="file" id="photoUpload" accept="image/*" multiple style="display:none;">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-hp px-4">
+            <i class="bi bi-send me-2"></i>Submit Review
+        </button>
+    </form>
+</div><!-- /write a review -->
+
+<!-- My Reviews -->
+<div class="section-card">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h2 class="section-title mb-0"><i class="bi bi-star me-2"></i>My Reviews</h2>
+        <span style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">3 reviews</span>
+    </div>
+
+    <!-- Review 1 -->
+    <div class="customer-review-card">
+        <div class="d-flex align-items-start gap-3">
+            <div class="review-img-thumb">
+                <i class="bi bi-image" style="font-size:1.4rem;color:#ccc;"></i>
+            </div>
+            <div class="flex-grow-1">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-1">
+                    <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Grandma Maria's Kitchen</span>
+                    <span style="font-family:'Open Sans',sans-serif;font-size:0.8rem;color:#aaa;">Mar 4, 2026</span>
+                </div>
+                <div class="stars mb-1">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p style="font-family:'Open Sans',sans-serif;font-size:0.88rem;color:#444;margin:0;">
+                    The lasagna was absolutely incredible — tasted exactly like home cooking. Generous portions, great packaging, and arrived warm. Will definitely order again!
+                </p>
+            </div>
+            <div class="d-flex flex-column gap-1">
+                <button class="btn btn-sm btn-hp-outline"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-sm" style="border:1px solid #eee;color:#ccc;"><i class="bi bi-trash"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review 2 -->
+    <div class="customer-review-card">
+        <div class="d-flex align-items-start gap-3">
+            <div class="review-img-thumb" style="background:#f3ede4;">
+                <i class="bi bi-image" style="font-size:1.4rem;color:#ccc;"></i>
+            </div>
+            <div class="flex-grow-1">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-1">
+                    <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Spice Route by Priya</span>
+                    <span style="font-family:'Open Sans',sans-serif;font-size:0.8rem;color:#aaa;">Feb 26, 2026</span>
+                </div>
+                <div class="stars mb-1">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                </div>
+                <p style="font-family:'Open Sans',sans-serif;font-size:0.88rem;color:#444;margin:0;">
+                    The tikka masala had a perfect level of spice. The naan was soft and buttery. Only docking one star because the delivery took a bit longer than expected, but the food quality made up for it.
+                </p>
+            </div>
+            <div class="d-flex flex-column gap-1">
+                <button class="btn btn-sm btn-hp-outline"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-sm" style="border:1px solid #eee;color:#ccc;"><i class="bi bi-trash"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review 3 -->
+    <div class="customer-review-card">
+        <div class="d-flex align-items-start gap-3">
+            <div class="review-img-thumb">
+                <i class="bi bi-image" style="font-size:1.4rem;color:#ccc;"></i>
+            </div>
+            <div class="flex-grow-1">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-1">
+                    <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Seoul Bowl by Jin</span>
+                    <span style="font-family:'Open Sans',sans-serif;font-size:0.8rem;color:#aaa;">Feb 19, 2026</span>
+                </div>
+                <div class="stars mb-1">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p style="font-family:'Open Sans',sans-serif;font-size:0.88rem;color:#444;margin:0;">
+                    Best bibimbap I've had outside of an actual Korean restaurant. The gochujang ratio was spot-on and everything was super fresh. Highly recommend!
+                </p>
+            </div>
+            <div class="d-flex flex-column gap-1">
+                <button class="btn btn-sm btn-hp-outline"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-sm" style="border:1px solid #eee;color:#ccc;"><i class="bi bi-trash"></i></button>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /my reviews -->
+
+<script>
+const orderData = {
+    maria: { restaurant: "Grandma Maria's Kitchen", items: "Grandma's Lasagna, Thai Green Curry, Honey Lemon Tart · Mar 2, 2026" },
+    priya: { restaurant: "Spice Route by Priya",    items: "Chicken Tikka Masala, Garlic Naan · Feb 24, 2026" },
+    jin:   { restaurant: "Seoul Bowl by Jin",        items: "Bibimbap Bowl · Feb 17, 2026" }
+};
+function updateOrderPreview(sel) {
+    const preview = document.getElementById('orderPreview');
+    if (!sel.value) { preview.style.display = 'none'; return; }
+    const d = orderData[sel.value];
+    document.getElementById('previewRestaurant').textContent = d.restaurant;
+    document.getElementById('previewItems').textContent = d.items;
+    preview.style.display = 'block';
+}
+</script>

@@ -1,0 +1,519 @@
+/* ==============================================
+   HomePlate — Customer Browse / Order styles
+   Used by: browse.html, search-results.html,
+            restaurant-detail.html, cart.html,
+            checkout.html, order-confirmation.html
+   ============================================== */
+
+/* ---- Override Bootstrap checkbox/radio accent ---- */
+.form-check-input:checked {
+    background-color: var(--burnt-orange-primary);
+    border-color: var(--burnt-orange-primary);
+}
+
+/* ---- Shared buttons ---- */
+.btn-hp {
+    background-color: var(--burnt-orange-primary);
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    border: none;
+    border-radius: 24px;
+    transition: background 0.15s;
+}
+.btn-hp:hover { background-color: #b04e31; color: #fff; }
+
+.btn-hp-outline {
+    background-color: transparent;
+    color: var(--burnt-orange-primary);
+    border: 1.5px solid var(--burnt-orange-primary);
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    border-radius: 24px;
+    transition: all 0.15s;
+}
+.btn-hp-outline:hover { background-color: var(--burnt-orange-primary); color: #fff; }
+
+/* ---- Hero search section ---- */
+.browse-hero {
+    background: linear-gradient(135deg, var(--burnt-orange-primary) 0%, #d97040 100%);
+    padding: 52px 24px;
+    text-align: center;
+}
+.browse-hero h2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 6px;
+}
+.browse-hero p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.96rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 24px;
+}
+
+/* ---- Search bar ---- */
+.browse-search-bar {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 30px;
+    padding: 8px 8px 8px 20px;
+    gap: 10px;
+    max-width: 660px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+.browse-search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.95rem;
+    background: transparent;
+}
+.browse-search-bar .search-btn {
+    background: var(--burnt-orange-primary);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 22px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ---- Category filter strip ---- */
+.category-strip {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 14px 24px;
+    background: var(--cream-primary);
+    border-bottom: 1px solid #eadfc8;
+    scrollbar-width: none;
+}
+.category-strip::-webkit-scrollbar { display: none; }
+
+.filter-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1.5px solid #d8d0c4;
+    background: #fff;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.83rem;
+    font-weight: 500;
+    color: var(--charcoal-gray-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    text-decoration: none;
+}
+.filter-pill:hover { border-color: var(--burnt-orange-primary); color: var(--burnt-orange-primary); }
+.filter-pill.active { border-color: var(--burnt-orange-primary); background: var(--burnt-orange-primary); color: #fff; }
+
+/* ---- Page content wrapper ---- */
+.browse-page { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+
+/* ---- Section title ---- */
+.browse-section-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--charcoal-gray-secondary);
+}
+
+/* ---- Restaurant cards ---- */
+.restaurant-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+.restaurant-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    color: inherit;
+}
+.restaurant-card-img {
+    width: 100%;
+    height: 145px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+}
+.restaurant-card-body { padding: 12px 14px; }
+.restaurant-card-name {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--charcoal-gray-secondary);
+    margin-bottom: 3px;
+}
+.restaurant-card-meta {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.77rem;
+    color: #888;
+    margin-bottom: 8px;
+}
+.restaurant-card-footer {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.76rem;
+    color: #666;
+    border-top: 1px solid #f0e8d8;
+    padding-top: 7px;
+}
+.restaurant-card-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--burnt-orange-primary);
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+/* ---- Filter sidebar (search results page) ---- */
+.filter-sidebar {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    position: sticky;
+    top: 72px;
+}
+.filter-sidebar-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--charcoal-gray-secondary);
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0e8d8;
+    margin-bottom: 4px;
+}
+.filter-group-label {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    margin-top: 14px;
+}
+.filter-sidebar .form-check-label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.86rem;
+    color: var(--charcoal-gray-secondary);
+}
+
+/* ---- Restaurant profile banner (detail page) ---- */
+.restaurant-profile-banner {
+    background: linear-gradient(135deg, #2c2c2c 0%, #444 100%);
+    padding: 36px 32px;
+    color: #fff;
+}
+
+/* ---- Menu category tabs ---- */
+.menu-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid #e4e4e4;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.menu-tabs::-webkit-scrollbar { display: none; }
+.menu-tab-btn {
+    padding: 10px 18px;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #888;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+}
+.menu-tab-btn.active { color: var(--burnt-orange-primary); border-bottom-color: var(--burnt-orange-primary); font-weight: 600; }
+.menu-tab-btn:hover { color: var(--burnt-orange-primary); }
+
+/* ---- Menu item cards ---- */
+.menu-item-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #fff;
+    border: 1px solid #e4e4e4;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+}
+.menu-item-img {
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    flex-shrink: 0;
+}
+.menu-item-info { flex: 1; }
+.menu-item-name {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--charcoal-gray-secondary);
+}
+.menu-item-desc {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.78rem;
+    color: #888;
+    margin-top: 2px;
+    line-height: 1.4;
+}
+.menu-item-price {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--burnt-orange-primary);
+    margin-top: 5px;
+}
+.menu-item-add {
+    background: var(--burnt-orange-primary);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s;
+}
+.menu-item-add:hover { background: #b04e31; }
+
+/* ---- Cart widget (restaurant-detail sidebar) ---- */
+.cart-widget {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+    position: sticky;
+    top: 72px;
+}
+.cart-widget-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--charcoal-gray-secondary);
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0e8d8;
+    margin-bottom: 14px;
+}
+.cart-item-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 0;
+    border-bottom: 1px solid #f5f0e8;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.84rem;
+}
+.cart-item-row:last-of-type { border-bottom: none; }
+.cart-qty-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid #ddd;
+    background: #fff;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--charcoal-gray-secondary);
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+/* ---- Order summary box (cart + checkout pages) ---- */
+.order-summary-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    position: sticky;
+    top: 72px;
+}
+.order-summary-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--charcoal-gray-secondary);
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0e8d8;
+    margin-bottom: 16px;
+}
+.order-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    color: #555;
+}
+.order-summary-row.total {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--charcoal-gray-secondary);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1.5px solid #e4e4e4;
+}
+
+/* ---- Cart page items ---- */
+.cart-page-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0e8d8;
+}
+.cart-page-item-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+}
+.qty-controls { display: flex; align-items: center; gap: 8px; }
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid #ddd;
+    background: #fff;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--charcoal-gray-secondary);
+    transition: border-color 0.1s;
+    line-height: 1;
+}
+.qty-btn:hover { border-color: var(--burnt-orange-primary); color: var(--burnt-orange-primary); }
+.qty-num { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 0.9rem; min-width: 20px; text-align: center; }
+
+/* ---- Checkout cards ---- */
+.checkout-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    margin-bottom: 16px;
+}
+.checkout-section-label {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0e8d8;
+}
+
+/* ---- Fulfillment option cards ---- */
+.fulfillment-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1.5px solid #e4e4e4;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: border-color 0.15s, background 0.15s;
+}
+.fulfillment-option.selected {
+    border-color: var(--burnt-orange-primary);
+    background: rgba(197, 90, 58, 0.03);
+}
+.fulfillment-option-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--charcoal-gray-secondary);
+}
+.fulfillment-option-desc {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+/* ---- Confirmation page ---- */
+.confirmation-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 48px 40px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 520px;
+    margin: 60px auto;
+}
+.confirmation-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(122, 155, 110, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--sage-green-secondary);
+    margin: 0 auto 20px;
+}
+.confirmation-detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.88rem;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0e8d8;
+    color: #555;
+}
+.confirmation-detail-row:last-of-type { border-bottom: none; }
