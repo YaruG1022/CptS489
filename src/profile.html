@@ -401,7 +401,50 @@
                             Default
                         </span>
                     </div>
-                    <button class="btn-hp-outline-edit mt-1 w-100">
+
+                    <!-- Add payment form (hidden until button clicked) -->
+                    <div id="add-payment-form" style="display:none;margin-top:14px;border:1.5px solid #e8e8e8;border-radius:10px;padding:18px 16px;background:#fafafa;">
+                        <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.9rem;color:var(--charcoal-gray-secondary);margin-bottom:14px;">
+                            <i class="bi bi-credit-card me-2"></i>New Card
+                        </div>
+
+                        <!-- Card Number -->
+                        <div class="mb-3">
+                            <label class="profile-field-label mb-1" for="card-number">Card Number</label>
+                            <input type="text" id="card-number" class="profile-input w-100"
+                                placeholder="1234 5678 9012 3456">
+                        </div>
+
+                        <!-- Cardholder Name -->
+                        <div class="mb-3">
+                            <label class="profile-field-label mb-1" for="card-name">Cardholder Name</label>
+                            <input type="text" id="card-name" class="profile-input w-100"
+                                placeholder="Name as it appears on card" autocomplete="cc-name">
+                        </div>
+
+                        <!-- Expiration + CVV row -->
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <label class="profile-field-label mb-1" for="card-expiry">Expiration Date</label>
+                                <input type="text" id="card-expiry" class="profile-input w-100"
+                                    placeholder="MM / YY">
+                            </div>
+                            <div class="col-6">
+                                <label class="profile-field-label mb-1" for="card-cvv">CVV</label>
+                                <input type="password" id="card-cvv" class="profile-input w-100"
+                                    placeholder="•••" maxlength="4">
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button class="btn-hp-outline-edit" onclick="cancelPayment()">Cancel</button>
+                            <button class="btn-hp-edit" onclick="savePayment()">
+                                <i class="bi bi-check-lg me-1"></i>Save Card
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="btn-hp-outline-edit mt-2 w-100" id="btn-add-payment" onclick="togglePaymentForm()">
                         <i class="bi bi-plus me-1"></i>Add Payment Method
                     </button>
                 </div>
@@ -489,6 +532,25 @@
 </div>
 
 <script>
+// ── Payment method ─────────────────────────────────
+function togglePaymentForm() {
+    const form = document.getElementById('add-payment-form');
+    const btn  = document.getElementById('btn-add-payment');
+    const open = form.style.display !== 'none';
+    form.style.display = open ? 'none' : 'block';
+    btn.innerHTML = open
+        ? '<i class="bi bi-plus me-1"></i>Add Payment Method'
+        : '<i class="bi bi-dash me-1"></i>Cancel';
+}
+function cancelPayment() {
+    document.getElementById('add-payment-form').style.display = 'none';
+    document.getElementById('btn-add-payment').innerHTML = '<i class="bi bi-plus me-1"></i>Add Payment Method';
+}
+function savePayment() {
+    cancelPayment();
+    showToast();
+}
+
 // ── Edit / view toggle ──────────────────────────────
 function enterEditMode() {
     document.getElementById('view-mode').style.display = 'none';
