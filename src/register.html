@@ -98,6 +98,7 @@
         }
         .role-icon-customer { background: rgba(197,90,58,.12); color: var(--burnt-orange-primary); }
         .role-icon-cook     { background: rgba(122,155,110,.15); color: var(--sage-green-secondary); }
+        .role-icon-driver   { background: rgba(232,180,74,.15);  color: var(--golden-yellow-secondary); }
         .role-title { font-weight: 600; font-size: 0.9rem; color: var(--charcoal-gray-secondary); }
         .role-desc  { font-size: 0.78rem; color: #999; font-family: 'Open Sans', sans-serif; font-weight:400; margin-top:1px; }
         .check-circle {
@@ -275,6 +276,18 @@
                     </div>
                     <div class="check-circle" id="cc-cook"></div>
                 </label>
+
+                <label class="role-card" id="card-driver">
+                    <input type="radio" name="role" value="driver" onchange="selectRole('card-driver')">
+                    <div class="role-icon role-icon-driver">
+                        <i class="bi bi-bicycle"></i>
+                    </div>
+                    <div>
+                        <div class="role-title">Delivery Driver</div>
+                        <div class="role-desc">Deliver meals and earn money on your own schedule</div>
+                    </div>
+                    <div class="check-circle" id="cc-driver"></div>
+                </label>
             </div>
 
             <!-- Terms -->
@@ -319,11 +332,19 @@ function togglePassword(id, btn) {
 }
 
 function selectRole(selectedId) {
-    ['card-customer', 'card-cook'].forEach(id => {
+    ['card-customer', 'card-cook', 'card-driver'].forEach(id => {
         document.getElementById(id).classList.toggle('selected', id === selectedId);
     });
     // Check the radio inside the selected card
     document.querySelector('#' + selectedId + ' input[type="radio"]').checked = true;
+
+    // Route to correct dashboard on submit
+    const destinations = {
+        'card-customer': 'customer-dashboard.html',
+        'card-cook':     'customer-dashboard.html',
+        'card-driver':   'driver-dashboard.html'
+    };
+    document.getElementById('register-form').action = destinations[selectedId];
 }
 
 function updateStrength(val) {
