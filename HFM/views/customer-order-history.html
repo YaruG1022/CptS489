@@ -1,5 +1,5 @@
 <!-- ================================================================
-     customer-order-history.html  â€”  fragment for customer-dashboard.html
+     customer-order-history.html  â€? fragment for customer-dashboard.html
      Click a row to expand/collapse order details.
      ================================================================ -->
 
@@ -10,7 +10,7 @@
     <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
         <div class="input-group" style="max-width:240px;">
             <span class="input-group-text" style="background-color:var(--cream-primary);"><i class="bi bi-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search ordersâ€¦">
+            <input type="text" class="form-control" placeholder="Search ordersâ€?>
         </div>
         <select class="form-select" style="max-width:160px;font-family:'Poppins',sans-serif;font-size:0.88rem;">
             <option>All Time</option>
@@ -48,9 +48,9 @@
                     <div class="col-md-6">
                         <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Items</div>
                         <ul style="font-family:'Open Sans',sans-serif;font-size:0.88rem;padding-left:18px;margin:0;">
-                            <li>Mutton Biryani &times; 1 â€” $20.00</li>
-                            <li>Chicken Tikka Masala &times; 1 â€” $20.00</li>
-                            <li>Beef Samosa &times; 1 â€” $9.00</li>
+                            <li>Mutton Biryani &times; 1 â€?$20.00</li>
+                            <li>Chicken Tikka Masala &times; 1 â€?$20.00</li>
+                            <li>Beef Samosa &times; 1 â€?$9.00</li>
                         </ul>
                         <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">
                             Subtotal $33.50 &nbsp;Â·&nbsp; Delivery $0.00 &nbsp;Â·&nbsp; Tip $3.00
@@ -96,8 +96,8 @@
                     <div class="col-md-6">
                         <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Items</div>
                         <ul style="font-family:'Open Sans',sans-serif;font-size:0.88rem;padding-left:18px;margin:0;">
-                            <li>Chicken Tikka Masala &times; 1 â€” $13.00</li>
-                            <li>Garlic Naan &times; 2 â€” $8.00</li>
+                            <li>Chicken Tikka Masala &times; 1 â€?$13.00</li>
+                            <li>Garlic Naan &times; 2 â€?$8.00</li>
                         </ul>
                         <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">
                             Subtotal $21.00 &nbsp;Â·&nbsp; Delivery $2.00 &nbsp;Â·&nbsp; Tip $2.50
@@ -143,7 +143,7 @@
                     <div class="col-md-6">
                         <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Items</div>
                         <ul style="font-family:'Open Sans',sans-serif;font-size:0.88rem;padding-left:18px;margin:0;">
-                            <li>Bibimbap Bowl &times; 1 â€” $14.00</li>
+                            <li>Bibimbap Bowl &times; 1 â€?$14.00</li>
                         </ul>
                         <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">
                             Subtotal $14.00 &nbsp;Â·&nbsp; Delivery $1.50 &nbsp;Â·&nbsp; Tip $2.00
@@ -173,17 +173,3 @@
 
 </div><!-- /section-card -->
 
-<script>
-function toggleHistory(header) {
-    const body = header.nextElementSibling;
-    const isOpen = body.classList.contains('open');
-    // close all
-    document.querySelectorAll('.history-item-body.open').forEach(el => el.classList.remove('open'));
-    document.querySelectorAll('.history-item-header.open').forEach(el => el.classList.remove('open'));
-    // open clicked if it was closed
-    if (!isOpen) {
-        body.classList.add('open');
-        header.classList.add('open');
-    }
-}
-</script>

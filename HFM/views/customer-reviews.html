@@ -1,5 +1,5 @@
 <!-- ================================================================
-     customer-reviews.html  —  fragment for customer-dashboard.html
+     customer-reviews.html  �? fragment for customer-dashboard.html
      ================================================================ -->
 
 <!-- Write a Review -->
@@ -11,7 +11,7 @@
         <div class="mb-3">
             <label class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:600;">Select an Order</label>
             <select class="form-select" style="font-family:'Open Sans',sans-serif;font-size:0.9rem;" id="reviewOrderSelect" onchange="updateOrderPreview(this)">
-                <option value="">— Choose an order to review —</option>
+                <option value="">�?Choose an order to review �?/option>
                 <option value="maria">Grandma Maria's Kitchen · Mar 2 · Lasagna, Curry, Tart</option>
                 <option value="priya">Spice Route by Priya · Feb 24 · Chicken Tikka, Naan</option>
                 <option value="jin">Seoul Bowl by Jin · Feb 17 · Bibimbap Bowl</option>
@@ -39,7 +39,7 @@
         <!-- Review text -->
         <div class="mb-3">
             <label for="reviewText" class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:600;">Your Review</label>
-            <textarea id="reviewText" class="form-control" rows="4" placeholder="Tell others about the food, portions, and cook…" style="font-family:'Open Sans',sans-serif;font-size:0.9rem;border-color:#ddd;"></textarea>
+            <textarea id="reviewText" class="form-control" rows="4" placeholder="Tell others about the food, portions, and cook�? style="font-family:'Open Sans',sans-serif;font-size:0.9rem;border-color:#ddd;"></textarea>
         </div>
 
         <!-- Image upload -->
@@ -81,7 +81,7 @@
                     <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                 </div>
                 <p style="font-family:'Open Sans',sans-serif;font-size:0.88rem;color:#444;margin:0;">
-                    The lasagna was absolutely incredible — tasted exactly like home cooking. Generous portions, great packaging, and arrived warm. Will definitely order again!
+                    The lasagna was absolutely incredible �?tasted exactly like home cooking. Generous portions, great packaging, and arrived warm. Will definitely order again!
                 </p>
             </div>
             <div class="d-flex flex-column gap-1">
@@ -143,18 +143,3 @@
 
 </div><!-- /my reviews -->
 
-<script>
-const orderData = {
-    maria: { restaurant: "Grandma Maria's Kitchen", items: "Grandma's Lasagna, Thai Green Curry, Honey Lemon Tart · Mar 2, 2026" },
-    priya: { restaurant: "Spice Route by Priya",    items: "Chicken Tikka Masala, Garlic Naan · Feb 24, 2026" },
-    jin:   { restaurant: "Seoul Bowl by Jin",        items: "Bibimbap Bowl · Feb 17, 2026" }
-};
-function updateOrderPreview(sel) {
-    const preview = document.getElementById('orderPreview');
-    if (!sel.value) { preview.style.display = 'none'; return; }
-    const d = orderData[sel.value];
-    document.getElementById('previewRestaurant').textContent = d.restaurant;
-    document.getElementById('previewItems').textContent = d.items;
-    preview.style.display = 'block';
-}
-</script>

@@ -1,5 +1,5 @@
 <!-- ================================================================
-     driver-order-history.html  â€”  fragment for driver-dashboard.html
+     driver-order-history.html  â€? fragment for driver-dashboard.html
      History of all past deliveries with status badges.
      ================================================================ -->
 
@@ -10,7 +10,7 @@
     <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
         <div class="input-group" style="max-width:240px;">
             <span class="input-group-text" style="background-color:var(--cream-primary);"><i class="bi bi-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search deliveriesâ€¦"
+            <input type="text" class="form-control" placeholder="Search deliveriesâ€?
                    style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
         </div>
         <select class="form-select" style="max-width:160px;font-family:'Poppins',sans-serif;font-size:0.88rem;">
@@ -59,8 +59,8 @@
                     <div class="col-md-6">
                         <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Earnings</div>
                         <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
-                            Base pay &nbsp;â€”&nbsp; $3.50<br>
-                            Tip &nbsp;â€”&nbsp; <span style="color:var(--sage-green-secondary);font-weight:600;">$3.00</span>
+                            Base pay &nbsp;â€?nbsp; $3.50<br>
+                            Tip &nbsp;â€?nbsp; <span style="color:var(--sage-green-secondary);font-weight:600;">$3.00</span>
                         </div>
                         <div class="mt-2" style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;color:var(--sage-green-secondary);">
                             Total: $6.50
@@ -107,8 +107,8 @@
                     <div class="col-md-6">
                         <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Earnings</div>
                         <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
-                            Base pay &nbsp;â€”&nbsp; $3.50<br>
-                            Tip &nbsp;â€”&nbsp; <span style="color:var(--sage-green-secondary);font-weight:600;">$1.50</span>
+                            Base pay &nbsp;â€?nbsp; $3.50<br>
+                            Tip &nbsp;â€?nbsp; <span style="color:var(--sage-green-secondary);font-weight:600;">$1.50</span>
                         </div>
                         <div class="mt-2" style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;color:var(--sage-green-secondary);">
                             Total: $5.00
@@ -125,7 +125,7 @@
         </div>
     </div>
 
-    <!-- Delivery 3 â€” Cancelled -->
+    <!-- Delivery 3 â€?Cancelled -->
     <div class="history-item">
         <div class="history-item-header" onclick="toggleHistory(this)">
             <div class="restaurant-icon" style="background:rgba(220,53,69,.09);color:#dc3545;"><i class="bi bi-x-circle"></i></div>
@@ -194,8 +194,8 @@
                     <div class="col-md-6">
                         <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Earnings</div>
                         <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
-                            Base pay &nbsp;â€”&nbsp; $3.50<br>
-                            Tip &nbsp;â€”&nbsp; <span style="color:var(--sage-green-secondary);font-weight:600;">$4.00</span>
+                            Base pay &nbsp;â€?nbsp; $3.50<br>
+                            Tip &nbsp;â€?nbsp; <span style="color:var(--sage-green-secondary);font-weight:600;">$4.00</span>
                         </div>
                         <div class="mt-2" style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;color:var(--sage-green-secondary);">
                             Total: $7.50
@@ -214,12 +214,3 @@
 
 </div>
 
-<script>
-function toggleHistory(header) {
-    const body    = header.nextElementSibling;
-    const chevron = header.querySelector('.history-chevron');
-    const isOpen  = body.classList.contains('open');
-    body.classList.toggle('open', !isOpen);
-    chevron.classList.toggle('rotated', !isOpen);
-}
-</script>
