@@ -141,8 +141,8 @@ body {
     margin: 0px;
     width: 100%;
     height: 100vh;
-    background-image: url(./assets/family-dinner-img.jpg);
-    background-image: url(./assets/family-dinner-img.jpg);
+    background-image: url(/images/family-dinner-img.jpg);
+    background-image: url(/images/family-dinner-img.jpg);
     background-size: cover;
     background-position: center;
 }
