@@ -1,0 +1,216 @@
+<!-- ================================================================
+     driver-order-history.html  鈥? fragment for driver-dashboard.html
+     History of all past deliveries with status badges.
+     ================================================================ -->
+
+<div class="section-card">
+    <h2 class="section-title"><i class="bi bi-receipt me-2"></i>Delivery History</h2>
+
+    <!-- Filters -->
+    <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+        <div class="input-group" style="max-width:240px;">
+            <span class="input-group-text" style="background-color:var(--cream-primary);"><i class="bi bi-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search deliveries鈥?
+                   style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
+        </div>
+        <select class="form-select" style="max-width:160px;font-family:'Poppins',sans-serif;font-size:0.88rem;">
+            <option>All Time</option>
+            <option>Last 30 Days</option>
+            <option>Last 3 Months</option>
+            <option>This Year</option>
+        </select>
+        <select class="form-select" style="max-width:150px;font-family:'Poppins',sans-serif;font-size:0.88rem;">
+            <option>All Statuses</option>
+            <option>Delivered</option>
+            <option>Cancelled</option>
+        </select>
+        <span style="margin-left:auto;font-family:'Open Sans',sans-serif;font-size:0.83rem;color:#888;">
+            47 deliveries total
+        </span>
+    </div>
+
+    <!-- Delivery 1 -->
+    <div class="history-item">
+        <div class="history-item-header" onclick="toggleHistory(this)">
+            <div class="restaurant-icon"><i class="bi bi-bicycle"></i></div>
+            <div class="flex-grow-1">
+                <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Grandma Maria's Kitchen</div>
+                <div style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">Mar 2, 2026 &nbsp;路&nbsp; Order #2087</div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <strong style="font-family:'Poppins',sans-serif;color:var(--sage-green-secondary);">+$6.50</strong>
+                <span class="badge bg-success">Delivered</span>
+                <i class="bi bi-chevron-down history-chevron"></i>
+            </div>
+        </div>
+        <div class="history-item-body">
+            <div class="pt-3">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Delivery Info</div>
+                        <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
+                            <i class="bi bi-geo-alt me-1 text-muted"></i>Pickup: 412 Maple Ave, Pullman WA<br>
+                            <i class="bi bi-house me-1 text-muted" style="margin-top:4px;"></i>Dropoff: 742 Evergreen Terrace, Pullman WA
+                        </div>
+                        <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.83rem;color:#888;">
+                            <i class="bi bi-person me-1"></i>Customer: Sarah K.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Earnings</div>
+                        <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
+                            Base pay &nbsp;鈥?nbsp; $3.50<br>
+                            Tip &nbsp;鈥?nbsp; <span style="color:var(--sage-green-secondary);font-weight:600;">$3.00</span>
+                        </div>
+                        <div class="mt-2" style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;color:var(--sage-green-secondary);">
+                            Total: $6.50
+                        </div>
+                        <div class="mt-2">
+                            <span class="d-flex align-items-center gap-1" style="font-family:'Open Sans',sans-serif;font-size:0.83rem;color:#888;">
+                                <i class="bi bi-star-fill" style="color:var(--golden-yellow-secondary);font-size:0.8rem;"></i>
+                                Customer rated: 5 / 5
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delivery 2 -->
+    <div class="history-item">
+        <div class="history-item-header" onclick="toggleHistory(this)">
+            <div class="restaurant-icon"><i class="bi bi-bicycle"></i></div>
+            <div class="flex-grow-1">
+                <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Spice Route by Priya</div>
+                <div style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">Feb 24, 2026 &nbsp;路&nbsp; Order #2041</div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <strong style="font-family:'Poppins',sans-serif;color:var(--sage-green-secondary);">+$5.00</strong>
+                <span class="badge bg-success">Delivered</span>
+                <i class="bi bi-chevron-down history-chevron"></i>
+            </div>
+        </div>
+        <div class="history-item-body">
+            <div class="pt-3">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Delivery Info</div>
+                        <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
+                            <i class="bi bi-geo-alt me-1 text-muted"></i>Pickup: 88 Spice Lane, Pullman WA<br>
+                            <i class="bi bi-house me-1 text-muted"></i>Dropoff: 310 Oak Street, Pullman WA
+                        </div>
+                        <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.83rem;color:#888;">
+                            <i class="bi bi-person me-1"></i>Customer: Mark T.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Earnings</div>
+                        <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
+                            Base pay &nbsp;鈥?nbsp; $3.50<br>
+                            Tip &nbsp;鈥?nbsp; <span style="color:var(--sage-green-secondary);font-weight:600;">$1.50</span>
+                        </div>
+                        <div class="mt-2" style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;color:var(--sage-green-secondary);">
+                            Total: $5.00
+                        </div>
+                        <div class="mt-2">
+                            <span class="d-flex align-items-center gap-1" style="font-family:'Open Sans',sans-serif;font-size:0.83rem;color:#888;">
+                                <i class="bi bi-star-fill" style="color:var(--golden-yellow-secondary);font-size:0.8rem;"></i>
+                                Customer rated: 5 / 5
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delivery 3 鈥?Cancelled -->
+    <div class="history-item">
+        <div class="history-item-header" onclick="toggleHistory(this)">
+            <div class="restaurant-icon" style="background:rgba(220,53,69,.09);color:#dc3545;"><i class="bi bi-x-circle"></i></div>
+            <div class="flex-grow-1">
+                <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Casa de Lopez</div>
+                <div style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">Feb 18, 2026 &nbsp;路&nbsp; Order #1998</div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <strong style="font-family:'Poppins',sans-serif;color:#dc3545;">$0.00</strong>
+                <span class="badge bg-danger">Cancelled</span>
+                <i class="bi bi-chevron-down history-chevron"></i>
+            </div>
+        </div>
+        <div class="history-item-body">
+            <div class="pt-3">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Delivery Info</div>
+                        <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
+                            <i class="bi bi-geo-alt me-1 text-muted"></i>Pickup: 55 Casa Blvd, Pullman WA<br>
+                            <i class="bi bi-house me-1 text-muted"></i>Dropoff: 200 Pine Ridge Rd, Pullman WA
+                        </div>
+                        <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.83rem;color:#888;">
+                            <i class="bi bi-person me-1"></i>Customer: Lisa H.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Cancellation</div>
+                        <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;color:#888;">
+                            Cancelled by customer before pickup.<br>
+                            No pay issued for this delivery.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delivery 4 -->
+    <div class="history-item">
+        <div class="history-item-header" onclick="toggleHistory(this)">
+            <div class="restaurant-icon"><i class="bi bi-bicycle"></i></div>
+            <div class="flex-grow-1">
+                <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Nana's Noodles</div>
+                <div style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">Feb 12, 2026 &nbsp;路&nbsp; Order #1970</div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <strong style="font-family:'Poppins',sans-serif;color:var(--sage-green-secondary);">+$7.50</strong>
+                <span class="badge bg-success">Delivered</span>
+                <i class="bi bi-chevron-down history-chevron"></i>
+            </div>
+        </div>
+        <div class="history-item-body">
+            <div class="pt-3">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Delivery Info</div>
+                        <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
+                            <i class="bi bi-geo-alt me-1 text-muted"></i>Pickup: 7 Noodle Way, Pullman WA<br>
+                            <i class="bi bi-house me-1 text-muted"></i>Dropoff: 501 Cedar Ave, Pullman WA
+                        </div>
+                        <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.83rem;color:#888;">
+                            <i class="bi bi-person me-1"></i>Customer: David W.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Earnings</div>
+                        <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
+                            Base pay &nbsp;鈥?nbsp; $3.50<br>
+                            Tip &nbsp;鈥?nbsp; <span style="color:var(--sage-green-secondary);font-weight:600;">$4.00</span>
+                        </div>
+                        <div class="mt-2" style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;color:var(--sage-green-secondary);">
+                            Total: $7.50
+                        </div>
+                        <div class="mt-2">
+                            <span class="d-flex align-items-center gap-1" style="font-family:'Open Sans',sans-serif;font-size:0.83rem;color:#888;">
+                                <i class="bi bi-star-fill" style="color:var(--golden-yellow-secondary);font-size:0.8rem;"></i>
+                                Customer rated: 4 / 5
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

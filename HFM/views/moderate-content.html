@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+</head>
+<body>
+    <!-- box for the main area (the entire visible screen aside from navbar basically) -->
+    <div class="main-box">
+
+        <div class="container-fluid p-5 table-container">
+            <div class="d-flex align-items-center mb-2">
+
+                <h2>Flagged Issues</h2>
+
+                <form class="d-flex ms-auto" action="">
+                    <label for="issuesSearch"></label>
+                    <input type="search" class="form-control" placeholder="Search issues">
+                </form>
+
+            </div>
+
+            <ul class="nav nav-tabs" id="flaggedIssuesTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#pendingIssues">Pending</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#resolvedIssues">Resolved</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#appealedIssues">Appeals</a>
+                </li>
+                <li class="nav-item"> 
+                    <a href="#allIssues" class="nav-link" data-bs-toggle="tab" aria-current="page">All Issues</a>
+                </li>
+                
+            </ul>
+
+            <div class="tab-content p-2">
+                <div class="tab-pane fade" id="allIssues">
+                    <table class="table">
+                        
+                        <thead> 
+                            <tr>
+                                <th scope="col">Issue ID</th>
+                                <th scope="col">Item/Review ID</th>
+                                <th scope="col">Date/Time Posted</th>
+                                <th scope="col">Flag Count</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bs-toggle="modal" data-bs-target="#issuesModal">
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane fade show active" id="pendingIssues">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Issue ID</th>
+                                <th scope="col">Item/Review ID</th>
+                                <th scope="col">Date/Time Posted</th>
+                                <th scope="col">Flag Count</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bs-toggle="modal" data-bs-target="#issuesModal">
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane fade" id="resolvedIssues">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Issue ID</th>
+                                <th scope="col">Item/Review ID</th>
+                                <th scope="col">Date/Time Posted</th>
+                                <th scope="col">Flag Count</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bs-toggle="modal" data-bs-target="#issuesModal">
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane fade" id="appealedIssues">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Issue ID</th>
+                                <th scope="col">Item/Review ID</th>
+                                <th scope="col">Date/Time Posted</th>
+                                <th scope="col">Flag Count</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bs-toggle="modal" data-bs-target="#issuesModal">
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>#111111</td>
+                                <td>[type]0000</td>
+                                <td>MM/DD/YYYY HH:MM:SS</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- modal that pops up with further user info -->
+        <div class="modal fade" id="issuesModal" tabindex="-1" aria-labelledby="issuesModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title fs-5" id="issuesModalHeader">Issue Info</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="issuesModalBody">
+                        <p><strong>Issue Title:</strong> [info]</p>
+                        <p><strong>Reported By:</strong> [info]</p>
+                        <p><strong>Flagged User:</strong> [info]</p>
+                        <p><strong>Date Posted:</strong> [info]</p>
+                        <p><strong>Flag Count:</strong> [info]</p>
+                        <hr>
+                        <p><strong>Description:</strong> [info]</p>
+                        <p class="m-0"><strong>Prior Issues:</strong> [link to issue log]</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn" id="contentModalDismissBtn">Dismiss Flag</button>
+                            <button type="button" class="btn" id="contentModalWarnBtn">Issue Warning</button>
+                            <button type="button" class="btn" id="contentModalRemoveBtn">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/javascripts/common-elements.js"></script>
+</body>
+</html>
+
