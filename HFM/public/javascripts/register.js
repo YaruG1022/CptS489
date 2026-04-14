@@ -11,7 +11,7 @@ function togglePassword(id, btn) {
 }
 
 function selectRole(selectedId) {
-    ['card-customer', 'card-cook', 'card-driver'].forEach(id => {
+    ['card-customer', 'card-cook'].forEach(id => {
         document.getElementById(id).classList.toggle('selected', id === selectedId);
     });
     // Check the radio inside the selected card
@@ -20,8 +20,7 @@ function selectRole(selectedId) {
     // Route to correct dashboard on submit
     const destinations = {
         'card-customer': 'customer-dashboard.html',
-        'card-cook':     'customer-dashboard.html',
-        'card-driver':   'driver-dashboard.html'
+        'card-cook':     'customer-dashboard.html'
     };
     document.getElementById('register-form').action = destinations[selectedId];
 }

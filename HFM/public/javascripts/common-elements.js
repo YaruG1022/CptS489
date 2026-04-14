@@ -8,7 +8,7 @@ const navbar =
                 <h1 id="navbar-header-text">HomePlate</h1>
             </a>
 
-            <a class="nav-item nav-link m-2" id="logout-nav-button" href="/admin-dashboard.html">
+            <a class="nav-item nav-link m-2" id="logout-nav-button" href="/merchant-dashboard.html">
                 Dashboard Demo
             </a>
         </div>
@@ -21,31 +21,10 @@ const sidenav =
         <div class="sidebar-container">
             <nav class="sidebar-nav">
                 <!-- sidebar links + tooltips -->
-                <a href="/admin-dashboard.html">
+                <a href="/merchant-dashboard.html">
                     <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard Home" src="/images/home-icon.png" alt="">
                 </a>
-                <a href="/vendor-applications.html">
-                    <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Vendor Applications" src="/images/applications-icon.png" alt="">
-                    <span class="badge rounded-pill bg-danger">
-                        <span class="visually-hidden">New alerts</span>
-                    </span>
-                </a>
-                <a href="/revenue.html">
-                    <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Revenue" src="/images/revenue-icon.png" alt="">
-                </a>
-                <a href="/manage-user.html">
-                    <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="User Management" src="/images/users-icon.png" alt="">
-                </a>
-                <a href="/moderate-content.html">
-                    <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Issues" src="/images/exclaim-icon.png" alt="">
-                </a>
-                <a href="/disputes.html">
-                    <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Disputes" src="/images/handshake-icon.png" alt="">
-                    <span class="badge rounded-pill bg-danger">
-                        <span class="visually-hidden">New alerts</span>
-                    </span>
-                </a>
-                <a href="/admin-profile.html">
+                <a href="/profile.html">
                     <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="My Account" src="/images/default-user.png" alt="">
                 </a>
             </nav>
