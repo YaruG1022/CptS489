@@ -43,6 +43,14 @@ User.init({
     type: DataTypes.ENUM('customer', 'cook'),
     allowNull: false,
     defaultValue: 'customer'
+  },
+  phone: {
+    type: DataTypes.STRING(20),
+    allowNull: true
+  },
+  dateOfBirth: {
+    type: DataTypes.DATEONLY,
+    allowNull: true
   }
 }, {
   sequelize,

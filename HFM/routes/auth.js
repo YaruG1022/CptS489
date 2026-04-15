@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
+var Customer = require('../models/Customer');
+var Merchant = require('../models/Merchant');
 
 /* ============  REGISTER  ============ */
 
@@ -27,7 +29,8 @@ router.post('/register', async function (req, res) {
   }
 
   try {
-    await User.create({ firstName, lastName, email, password, role });
+    var ModelClass = (role === 'cook') ? Merchant : Customer;
+    await ModelClass.create({ firstName, lastName, email, password });
     res.redirect('/login');
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {

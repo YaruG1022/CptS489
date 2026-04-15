@@ -1,0 +1,43 @@
+const User = require('./User');
+const { DataTypes } = require('sequelize');
+
+class Customer extends User {
+
+  static async findByEmail(email) {
+    return await Customer.findOne({ where: { email } });
+  }
+
+}
+
+Customer.init({
+  street: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
+  city: {
+    type: DataTypes.STRING(100),
+    allowNull: true
+  },
+  state: {
+    type: DataTypes.STRING(2),
+    allowNull: true
+  },
+  zip: {
+    type: DataTypes.STRING(10),
+    allowNull: true
+  }
+}, {
+  sequelize: User.sequelize,
+  modelName: 'Customer',
+  tableName: 'users',
+  defaultScope: {
+    where: { role: 'customer' }
+  },
+  hooks: {
+    beforeCreate: (user) => {
+      user.role = 'customer';
+    }
+  }
+});
+
+module.exports = Customer;
