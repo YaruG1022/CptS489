@@ -23,18 +23,24 @@
 
         <div class="auth-title">Create your account</div>
 
-        <form id="register-form" action="customer-dashboard.html" method="get" onsubmit="return validateRegister()">
+        <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-danger py-2" style="font-family:'Open Sans',sans-serif;font-size:0.85rem;">
+            <%= error %>
+        </div>
+        <% } %>
+
+        <form id="register-form" action="/register" method="post" onsubmit="return validateRegister()">
 
             <!-- Name row -->
             <div class="row g-3 mb-3">
                 <div class="col-6">
                     <label class="auth-label mb-1" for="reg-first">First name</label>
-                    <input type="text" id="reg-first" class="form-control auth-input"
+                    <input type="text" id="reg-first" name="firstName" class="form-control auth-input"
                         placeholder="First name" required autocomplete="given-name">
                 </div>
                 <div class="col-6">
                     <label class="auth-label mb-1" for="reg-last">Last name</label>
-                    <input type="text" id="reg-last" class="form-control auth-input"
+                    <input type="text" id="reg-last" name="lastName" class="form-control auth-input"
                         placeholder="Last name" required autocomplete="family-name">
                 </div>
             </div>
@@ -42,7 +48,7 @@
             <!-- Email -->
             <div class="mb-3">
                 <label class="auth-label mb-1" for="reg-email">Email address</label>
-                <input type="email" id="reg-email" class="form-control auth-input"
+                <input type="email" id="reg-email" name="email" class="form-control auth-input"
                     placeholder="you@example.com" required autocomplete="email">
             </div>
 
@@ -50,7 +56,7 @@
             <div class="mb-3">
                 <label class="auth-label mb-1" for="reg-password">Password</label>
                 <div class="password-toggle">
-                    <input type="password" id="reg-password" class="form-control auth-input"
+                    <input type="password" id="reg-password" name="password" class="form-control auth-input"
                         placeholder="Create a password" required autocomplete="new-password"
                         oninput="updateStrength(this.value)">
                     <button type="button" class="toggle-btn" onclick="togglePassword('reg-password', this)">
@@ -70,7 +76,7 @@
             <div class="mb-4">
                 <label class="auth-label mb-1" for="reg-confirm">Confirm password</label>
                 <div class="password-toggle">
-                    <input type="password" id="reg-confirm" class="form-control auth-input"
+                    <input type="password" id="reg-confirm" name="confirmPassword" class="form-control auth-input"
                         placeholder="Repeat your password" required autocomplete="new-password">
                     <button type="button" class="toggle-btn" onclick="togglePassword('reg-confirm', this)">
                         <i class="bi bi-eye"></i>
