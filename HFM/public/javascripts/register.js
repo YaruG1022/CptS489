@@ -14,15 +14,7 @@ function selectRole(selectedId) {
     ['card-customer', 'card-cook'].forEach(id => {
         document.getElementById(id).classList.toggle('selected', id === selectedId);
     });
-    // Check the radio inside the selected card
     document.querySelector('#' + selectedId + ' input[type="radio"]').checked = true;
-
-    // Route to correct dashboard on submit
-    const destinations = {
-        'card-customer': 'customer-dashboard.html',
-        'card-cook':     'customer-dashboard.html'
-    };
-    document.getElementById('register-form').action = destinations[selectedId];
 }
 
 function updateStrength(val) {
