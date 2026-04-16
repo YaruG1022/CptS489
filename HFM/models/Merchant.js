@@ -40,6 +40,22 @@ Merchant.init({
     type: DataTypes.DECIMAL(5, 2),
     allowNull: true,
     defaultValue: 0.00
+  },
+  street: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
+  city: {
+    type: DataTypes.STRING(100),
+    allowNull: true
+  },
+  state: {
+    type: DataTypes.STRING(2),
+    allowNull: true
+  },
+  zip: {
+    type: DataTypes.STRING(10),
+    allowNull: true
   }
 }, {
   sequelize: User.sequelize,
