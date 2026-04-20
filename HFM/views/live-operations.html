@@ -37,9 +37,7 @@
                 <a href="#">
                     <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Analytics" src="/images/chart-icon.png" alt="">
                 </a>
-                <a href="/manage-user.html">
-                    <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="User Management" src="/images/users-icon.png" alt="">
-                </a>
+
                 <a href="#">
                     <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="My Account" src="/images/default-user.png" alt="">
                 </a>
@@ -53,9 +51,7 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="current-orders-tab" data-bs-toggle="tab" data-bs-target="#current-orders" type="button" role="tab" aria-controls="current-orders" aria-selected="true">Current Orders</button>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pending-orders-tab" data-bs-toggle="tab" data-bs-target="#pending-orders" type="button" role="tab" aria-controls="pending-orders" aria-selected="false">Pending Orders</button>
-                    </li>
+
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="live-menu-tab" data-bs-toggle="tab" data-bs-target="#live-menu" type="button" role="tab" aria-controls="live-menu" aria-selected="false">Live Menu</button>
                     </li>
@@ -105,38 +101,7 @@
                             </div>
                         </div>
                 </div>
-                <!--Content for the Pending Orders tab-->
-                <div class="tab-pane fade" id="pending-orders" role="tabpanel" aria-labelledby="pending-orders-tab">
-                    <div class="container">
-                        <h2 class="mt-4">Pending Orders</h2>
-                        <p>Here you can view and manage all pending orders.Below is an example.</p>
-                        <!-- Example Pending Order Row -->
-                        <div class ="order-row">
-                            <div class = "order-row-header">
-                                <div class="order-info">
-                                    <span class="fw-bold">Order# 12345</span>
-                                    <span class="text-muted">Placed: 00:00 PM</span>
-                                </div>
-                                <div class="d-flex align-items-center gap-3">
-                                    <button class="btn button-details" type="button" data-bs-toggle="collapse" data-bs-target="#orderDetails12345" aria-expanded="false" aria-controls="orderDetails12345">
-                                        Order Details
-                                    </button>
-                                </div>
-                                <button class="btn button-ready btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept Order">Accept Order!</button>
-                            </div>
-                            <div class="collapse" id="PendingOrderDetails12345">
-                                <p><strong>Items:</strong></p>
-                                <ul>
-                                    <li>1x Cheeseburger</li>
-                                    <li>2x Fries</li>
-                                    <li>1x Soda</li>
-                                </ul>
-                                <p><strong>Total:</strong> $15.00</p>
-                                <button class="btn button-cancel btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Reject Order">Reject Order</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <!--Content for the Live Menu tab-->
                 <div class="tab-pane fade" id="live-menu" role="tabpanel" aria-labelledby="live-menu-tab">
                     <div class="container">

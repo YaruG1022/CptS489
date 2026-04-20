@@ -1,14 +1,13 @@
 const sectionFiles = {
     'order-status': 'customer-order-status.html',
-    'history':      'customer-order-history.html',
-    'reviews':      'customer-reviews.html'
+    'history':      'customer-order-history.html'
 };
 
 function clearSection() {
     document.getElementById('section-content').innerHTML =
         '<div class="text-center py-5" style="color:#bbb;font-family:\'Poppins\',sans-serif;">' +
         '<div class="spinner-border" style="color:var(--burnt-orange-primary);" role="status"></div>' +
-        '<div class="mt-2" style="font-size:0.88rem;">Loadingâ€?/div></div>';
+        '<div class="mt-2" style="font-size:0.88rem;">Loadingï¿½?/div></div>';
 }
 
 function setActiveTab(section) {

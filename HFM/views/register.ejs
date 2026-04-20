@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HomePlate â€?Create Account</title>
+    <title>HomePlate ï¿½?Create Account</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -23,18 +23,24 @@
 
         <div class="auth-title">Create your account</div>
 
-        <form id="register-form" action="customer-dashboard.html" method="get" onsubmit="return validateRegister()">
+        <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-danger py-2" style="font-family:'Open Sans',sans-serif;font-size:0.85rem;">
+            <%= error %>
+        </div>
+        <% } %>
+
+        <form id="register-form" action="/register" method="post" onsubmit="return validateRegister()">
 
             <!-- Name row -->
             <div class="row g-3 mb-3">
                 <div class="col-6">
                     <label class="auth-label mb-1" for="reg-first">First name</label>
-                    <input type="text" id="reg-first" class="form-control auth-input"
+                    <input type="text" id="reg-first" name="firstName" class="form-control auth-input"
                         placeholder="First name" required autocomplete="given-name">
                 </div>
                 <div class="col-6">
                     <label class="auth-label mb-1" for="reg-last">Last name</label>
-                    <input type="text" id="reg-last" class="form-control auth-input"
+                    <input type="text" id="reg-last" name="lastName" class="form-control auth-input"
                         placeholder="Last name" required autocomplete="family-name">
                 </div>
             </div>
@@ -42,7 +48,7 @@
             <!-- Email -->
             <div class="mb-3">
                 <label class="auth-label mb-1" for="reg-email">Email address</label>
-                <input type="email" id="reg-email" class="form-control auth-input"
+                <input type="email" id="reg-email" name="email" class="form-control auth-input"
                     placeholder="you@example.com" required autocomplete="email">
             </div>
 
@@ -50,27 +56,20 @@
             <div class="mb-3">
                 <label class="auth-label mb-1" for="reg-password">Password</label>
                 <div class="password-toggle">
-                    <input type="password" id="reg-password" class="form-control auth-input"
+                    <input type="password" id="reg-password" name="password" class="form-control auth-input"
                         placeholder="Create a password" required autocomplete="new-password"
-                        oninput="updateStrength(this.value)">
+                        oninput="">
                     <button type="button" class="toggle-btn" onclick="togglePassword('reg-password', this)">
                         <i class="bi bi-eye"></i>
                     </button>
                 </div>
-                <div class="strength-bar-row">
-                    <div class="strength-seg" id="s1"></div>
-                    <div class="strength-seg" id="s2"></div>
-                    <div class="strength-seg" id="s3"></div>
-                    <div class="strength-seg" id="s4"></div>
-                </div>
-                <div class="strength-label" id="strength-text" style="color:#bbb;">Enter a password</div>
             </div>
 
             <!-- Confirm Password -->
             <div class="mb-4">
                 <label class="auth-label mb-1" for="reg-confirm">Confirm password</label>
                 <div class="password-toggle">
-                    <input type="password" id="reg-confirm" class="form-control auth-input"
+                    <input type="password" id="reg-confirm" name="confirmPassword" class="form-control auth-input"
                         placeholder="Repeat your password" required autocomplete="new-password">
                     <button type="button" class="toggle-btn" onclick="togglePassword('reg-confirm', this)">
                         <i class="bi bi-eye"></i>
@@ -82,7 +81,6 @@
             </div>
 
             <!-- Role selector -->
-            <div class="section-label">I am joining as aâ€?/div>
             <div class="d-flex flex-column gap-2 mb-4">
                 <label class="role-card selected" id="card-customer">
                     <input type="radio" name="role" value="customer" checked onchange="selectRole('card-customer')">
@@ -104,30 +102,7 @@
                     <div class="check-circle" id="cc-cook"></div>
                 </label>
 
-                <label class="role-card" id="card-driver">
-                    <input type="radio" name="role" value="driver" onchange="selectRole('card-driver')">
-                    <div class="role-icon role-icon-driver">
-                        <i class="bi bi-bicycle"></i>
-                    </div>
-                    <div>
-                        <div class="role-title">Delivery Driver</div>
-                        <div class="role-desc">Deliver meals and earn money on your own schedule</div>
-                    </div>
-                    <div class="check-circle" id="cc-driver"></div>
-                </label>
-            </div>
 
-            <!-- Terms -->
-            <div class="form-check mb-4">
-                <input class="form-check-input" type="checkbox" id="reg-terms" required
-                    style="border-color:#ccc;">
-                <label class="form-check-label" for="reg-terms"
-                    style="font-family:'Open Sans',sans-serif;font-size:0.83rem;color:#777;">
-                    I agree to the
-                    <a href="#" style="color:var(--burnt-orange-primary);font-weight:600;text-decoration:none;">Terms of Service</a>
-                    and
-                    <a href="#" style="color:var(--burnt-orange-primary);font-weight:600;text-decoration:none;">Privacy Policy</a>
-                </label>
             </div>
 
             <!-- Error -->
@@ -139,7 +114,7 @@
         </form>
 
         <div class="auth-footer">
-            Already have an account? <a href="login.html">Log in</a>
+            Already have an account? <a href="/login">Log in</a>
         </div>
 
     </div>

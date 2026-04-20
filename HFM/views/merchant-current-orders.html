@@ -1,0 +1,43 @@
+<!-- merchant-current-orders.html — fragment loaded into merchant-dashboard -->
+
+<div class="section-card">
+    <h2 class="section-title"><i class="bi bi-clock-history me-2"></i>Current Orders</h2>
+    <p style="font-family:'Open Sans',sans-serif;font-size:0.85rem;color:#888;margin-bottom:20px;">
+        Most recent order.
+    </p>
+
+    <!-- Most recent order -->
+    <div class="history-item">
+        <div class="history-item-header" onclick="toggleHistory(this)">
+            <div class="restaurant-icon"><i class="bi bi-bag"></i></div>
+            <div class="flex-grow-1" style="min-width:0;">
+                <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Order #1001 — John D.</div>
+                <div style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">Apr 20, 2026 &nbsp;·&nbsp; 3 items</div>
+            </div>
+            <div class="d-flex align-items-center gap-3" style="flex-shrink:0;">
+                <strong style="font-family:'Poppins',sans-serif;color:var(--burnt-orange-primary);">$33.50</strong>
+                <span class="badge" style="background:var(--golden-yellow-secondary);color:var(--charcoal-gray-secondary);">Pending</span>
+                <i class="bi bi-chevron-down history-chevron"></i>
+            </div>
+        </div>
+        <div class="history-item-body">
+            <div class="pt-3">
+                <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Items</div>
+                <ul style="font-family:'Open Sans',sans-serif;font-size:0.88rem;padding-left:18px;margin:0;">
+                    <li>Mutton Biryani &times; 1 — $20.00</li>
+                    <li>Chicken Tikka Masala &times; 1 — $10.00</li>
+                    <li>Garlic Naan &times; 1 — $3.50</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function toggleHistory(header) {
+    var body = header.nextElementSibling;
+    body.classList.toggle('open');
+    header.classList.toggle('open');
+}
+</script>

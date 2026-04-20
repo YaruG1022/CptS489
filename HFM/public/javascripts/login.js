@@ -9,14 +9,3 @@ function togglePassword(id, btn) {
         icon.className = 'bi bi-eye';
     }
 }
-
-function validateLogin() {
-    // Mockup: accept any non-empty email/password and navigate
-    const email = document.getElementById('login-email').value.trim();
-    const pass  = document.getElementById('login-password').value;
-    if (!email || !pass) {
-        document.getElementById('login-error').style.display = 'block';
-        return false;
-    }
-    return true; // proceeds to customer-dashboard.html via form action
-}
