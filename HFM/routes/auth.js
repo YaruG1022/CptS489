@@ -66,7 +66,7 @@ router.post('/login', async function (req, res) {
     if (user.role === 'cook') {
       res.redirect('/merchant-dashboard.html');
     } else {
-      res.redirect('/customer-dashboard.html');
+      res.redirect('/browse.html');
     }
   } catch (err) {
     console.error(err);

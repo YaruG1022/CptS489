@@ -1,5 +1,5 @@
 <!-- ================================================================
-     customer-order-history.html  â€? fragment for customer-dashboard.html
+     customer-order-history.html  ï¿½? fragment for customer-dashboard.html
      Click a row to expand/collapse order details.
      ================================================================ -->
 
@@ -10,14 +10,8 @@
     <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
         <div class="input-group" style="max-width:240px;">
             <span class="input-group-text" style="background-color:var(--cream-primary);"><i class="bi bi-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search ordersâ€?>
+            <input type="text" class="form-control" placeholder="Search ordersâ€¦">
         </div>
-        <select class="form-select" style="max-width:160px;font-family:'Poppins',sans-serif;font-size:0.88rem;">
-            <option>All Time</option>
-            <option>Last 30 Days</option>
-            <option>Last 3 Months</option>
-            <option>This Year</option>
-        </select>
         <span style="margin-left:auto;font-family:'Open Sans',sans-serif;font-size:0.83rem;color:#888;">
             12 orders total
         </span>
@@ -29,16 +23,13 @@
     <div class="history-item">
         <div class="history-item-header" onclick="toggleHistory(this)">
             <div class="restaurant-icon"><i class="bi bi-house-heart"></i></div>
-            <div class="flex-grow-1">
+            <div class="flex-grow-1" style="min-width:0;">
                 <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Grandma Maria's Kitchen</div>
                 <div style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">Mar 2, 2026 &nbsp;Â·&nbsp; 3 items</div>
             </div>
-            <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-3" style="flex-shrink:0;">
                 <strong style="font-family:'Poppins',sans-serif;color:var(--burnt-orange-primary);">$33.50</strong>
                 <span class="badge bg-success">Delivered</span>
-                <button class="btn btn-sm btn-hp-outline" onclick="event.stopPropagation()">
-                    <i class="bi bi-question-circle me-1"></i>Help
-                </button>
                 <i class="bi bi-chevron-down history-chevron"></i>
             </div>
         </div>
@@ -48,9 +39,9 @@
                     <div class="col-md-6">
                         <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Items</div>
                         <ul style="font-family:'Open Sans',sans-serif;font-size:0.88rem;padding-left:18px;margin:0;">
-                            <li>Mutton Biryani &times; 1 â€?$20.00</li>
-                            <li>Chicken Tikka Masala &times; 1 â€?$20.00</li>
-                            <li>Beef Samosa &times; 1 â€?$9.00</li>
+                            <li>Mutton Biryani &times; 1 ï¿½?$20.00</li>
+                            <li>Chicken Tikka Masala &times; 1 ï¿½?$20.00</li>
+                            <li>Beef Samosa &times; 1 ï¿½?$9.00</li>
                         </ul>
                         <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">
                             Subtotal $33.50 &nbsp;Â·&nbsp; Delivery $0.00 &nbsp;Â·&nbsp; Tip $3.00
@@ -77,16 +68,13 @@
     <div class="history-item">
         <div class="history-item-header" onclick="toggleHistory(this)">
             <div class="restaurant-icon"><i class="bi bi-house-heart"></i></div>
-            <div class="flex-grow-1">
+            <div class="flex-grow-1" style="min-width:0;">
                 <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Spice Route by Priya</div>
                 <div style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">Feb 24, 2026 &nbsp;Â·&nbsp; 2 items</div>
             </div>
-            <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-3" style="flex-shrink:0;">
                 <strong style="font-family:'Poppins',sans-serif;color:var(--burnt-orange-primary);">$21.00</strong>
                 <span class="badge bg-success">Delivered</span>
-                <button class="btn btn-sm btn-hp-outline" onclick="event.stopPropagation()">
-                    <i class="bi bi-question-circle me-1"></i>Help
-                </button>
                 <i class="bi bi-chevron-down history-chevron"></i>
             </div>
         </div>
@@ -96,8 +84,8 @@
                     <div class="col-md-6">
                         <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Items</div>
                         <ul style="font-family:'Open Sans',sans-serif;font-size:0.88rem;padding-left:18px;margin:0;">
-                            <li>Chicken Tikka Masala &times; 1 â€?$13.00</li>
-                            <li>Garlic Naan &times; 2 â€?$8.00</li>
+                            <li>Chicken Tikka Masala &times; 1 ï¿½?$13.00</li>
+                            <li>Garlic Naan &times; 2 ï¿½?$8.00</li>
                         </ul>
                         <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">
                             Subtotal $21.00 &nbsp;Â·&nbsp; Delivery $2.00 &nbsp;Â·&nbsp; Tip $2.50
@@ -124,16 +112,13 @@
     <div class="history-item">
         <div class="history-item-header" onclick="toggleHistory(this)">
             <div class="restaurant-icon"><i class="bi bi-house-heart"></i></div>
-            <div class="flex-grow-1">
+            <div class="flex-grow-1" style="min-width:0;">
                 <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Seoul Bowl by Jin</div>
                 <div style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">Feb 17, 2026 &nbsp;Â·&nbsp; 1 item</div>
             </div>
-            <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-3" style="flex-shrink:0;">
                 <strong style="font-family:'Poppins',sans-serif;color:var(--burnt-orange-primary);">$14.00</strong>
                 <span class="badge bg-success">Delivered</span>
-                <button class="btn btn-sm btn-hp-outline" onclick="event.stopPropagation()">
-                    <i class="bi bi-question-circle me-1"></i>Help
-                </button>
                 <i class="bi bi-chevron-down history-chevron"></i>
             </div>
         </div>
@@ -143,7 +128,7 @@
                     <div class="col-md-6">
                         <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Items</div>
                         <ul style="font-family:'Open Sans',sans-serif;font-size:0.88rem;padding-left:18px;margin:0;">
-                            <li>Bibimbap Bowl &times; 1 â€?$14.00</li>
+                            <li>Bibimbap Bowl &times; 1 ï¿½?$14.00</li>
                         </ul>
                         <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">
                             Subtotal $14.00 &nbsp;Â·&nbsp; Delivery $1.50 &nbsp;Â·&nbsp; Tip $2.00
@@ -164,11 +149,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Load More -->
-    <div class="text-center mt-2">
-        <button class="btn btn-hp-outline">Load More Orders</button>
     </div>
 
 </div><!-- /section-card -->
