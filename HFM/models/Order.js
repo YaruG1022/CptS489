@@ -26,6 +26,10 @@ Order.init({
     type: DataTypes.INTEGER,
     allowNull: false
   },
+  restaurantId: {
+    type: DataTypes.INTEGER,
+    allowNull: true
+  },
   status: {
     type: DataTypes.ENUM('pending', 'placed', 'confirmed', 'ready', 'delivered', 'cancelled'),
     allowNull: false,

@@ -11,6 +11,8 @@ var authRouter = require('./routes/auth');
 var menuRouter = require('./routes/menu');
 var merchantRouter = require('./routes/merchant');
 var browseRouter = require('./routes/browse');
+var restaurantDetailRouter = require('./routes/restaurant-detail');
+var cartRouter = require('./routes/cart');
 var sequelize = require('./db');
 
 var app = express();
@@ -38,6 +40,8 @@ app.use('/users', usersRouter);
 app.use('/', authRouter);
 app.use('/', merchantRouter);
 app.use('/', browseRouter);
+app.use('/', restaurantDetailRouter);
+app.use('/', cartRouter);
 app.use('/api', menuRouter);
 
 // Sync database tables
