@@ -22,7 +22,7 @@
            style="background:rgba(255,255,255,.15);color:#fff;font-family:'Poppins',sans-serif;font-size:0.85rem;border-radius:20px;padding:4px 14px;border:1px solid rgba(255,255,255,.3);">
             <i class="bi bi-search me-1"></i>Browse
         </a>
-        <a href="customer-dashboard.html" class="btn btn-sm"
+        <a href="/customer-dashboard" class="btn btn-sm"
            style="background:rgba(255,255,255,.15);color:#fff;font-family:'Poppins',sans-serif;font-size:0.85rem;border-radius:20px;padding:4px 14px;border:1px solid rgba(255,255,255,.3);">
             <i class="bi bi-grid me-1"></i>Dashboard
         </a>
@@ -31,7 +31,7 @@
             Welcome, <%= user.firstName %>
         </span>
         <% } %>
-        <a href="/index.html" class="btn btn-sm" style="background:#fff;color:var(--burnt-orange-primary);font-family:'Poppins',sans-serif;font-weight:600;border-radius:20px;padding:4px 16px;">Log Out</a>
+        <a href="/logout" class="btn btn-sm" style="background:#fff;color:var(--burnt-orange-primary);font-family:'Poppins',sans-serif;font-weight:600;border-radius:20px;padding:4px 16px;">Log Out</a>
     </div>
 </nav>
 
@@ -97,7 +97,7 @@
 
         <!-- CTA Buttons -->
         <div class="d-flex flex-column gap-2">
-            <a href="customer-order-status.html" class="btn btn-hp" style="padding:12px;font-size:0.92rem;">
+            <a href="/customer-dashboard" class="btn btn-hp" style="padding:12px;font-size:0.92rem;">
                 <i class="bi bi-eye me-1"></i>View My Current Order
             </a>
             <a href="/browse" class="btn btn-hp-outline" style="padding:11px;font-size:0.88rem;">

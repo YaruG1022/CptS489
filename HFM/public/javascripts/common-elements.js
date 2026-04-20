@@ -8,7 +8,7 @@ const navbar =
                 <h1 id="navbar-header-text">HomePlate</h1>
             </a>
 
-            <a class="nav-item nav-link m-2" id="logout-nav-button" href="/merchant-dashboard.html">
+            <a class="nav-item nav-link m-2" id="logout-nav-button" href="/merchant-dashboard">
                 Dashboard Demo
             </a>
         </div>
@@ -21,10 +21,10 @@ const sidenav =
         <div class="sidebar-container">
             <nav class="sidebar-nav">
                 <!-- sidebar links + tooltips -->
-                <a href="/merchant-dashboard.html">
+                <a href="/merchant-dashboard">
                     <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard Home" src="/images/home-icon.png" alt="">
                 </a>
-                <a href="/profile.html">
+                <a href="/profile">
                     <img class="sidebar-nav-link-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="My Account" src="/images/default-user.png" alt="">
                 </a>
             </nav>
