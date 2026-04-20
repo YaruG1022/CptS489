@@ -28,7 +28,7 @@ app.use('/users', usersRouter);
 app.use('/', authRouter);
 
 // Sync database tables
-sequelize.sync().then(() => {
+sequelize.sync({ alter: true }).then(() => {
   console.log('Database synced');
 }).catch(err => {
   console.error('Database sync failed:', err.message);

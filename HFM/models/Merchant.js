@@ -1,6 +1,7 @@
 const User = require('./User');
 const MenuItem = require('./MenuItem');
 const { DataTypes } = require('sequelize');
+const bcrypt = require('bcryptjs');
 
 class Merchant extends User {
 
@@ -15,6 +16,37 @@ class Merchant extends User {
 }
 
 Merchant.init({
+  firstName: {
+    type: DataTypes.STRING(50),
+    allowNull: false
+  },
+  lastName: {
+    type: DataTypes.STRING(50),
+    allowNull: false
+  },
+  email: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    unique: true,
+    validate: { isEmail: true }
+  },
+  password: {
+    type: DataTypes.STRING(255),
+    allowNull: false
+  },
+  role: {
+    type: DataTypes.ENUM('customer', 'cook'),
+    allowNull: false,
+    defaultValue: 'customer'
+  },
+  phone: {
+    type: DataTypes.STRING(20),
+    allowNull: true
+  },
+  dateOfBirth: {
+    type: DataTypes.DATEONLY,
+    allowNull: true
+  },
   kitchenName: {
     type: DataTypes.STRING(100),
     allowNull: true
@@ -65,8 +97,9 @@ Merchant.init({
     where: { role: 'cook' }
   },
   hooks: {
-    beforeCreate: (user) => {
+    beforeCreate: async (user) => {
       user.role = 'cook';
+      user.password = await bcrypt.hash(user.password, 10);
     }
   }
 });
