@@ -4,6 +4,7 @@ var User = require('../models/User');
 var Order = require('../models/Order');
 var OrderItem = require('../models/OrderItem');
 var Restaurant = require('../models/Restaurant');
+var MenuItem = require('../models/MenuItem');
 
 var STATE_NAME_TO_CODE = {
   alabama: 'AL', alaska: 'AK', arizona: 'AZ', arkansas: 'AR', california: 'CA',
@@ -82,43 +83,102 @@ router.get('/checkout', async function (req, res) {
    ACTION: POST /checkout  — place the order
    ══════════════════════════════════════════════ */
 router.post('/checkout', async function (req, res) {
+  var orderId = parseInt(req.body.orderId);
   try {
     if (!req.session || !req.session.userId) return res.redirect('/login');
 
-    var orderId = parseInt(req.body.orderId);
-    var order = await Order.findOne({
-      where: { id: orderId, customerId: req.session.userId, status: 'pending' }
-    });
-
-    if (!order) return res.redirect('/cart');
+    if (!orderId) return res.redirect('/cart');
 
     var normalizedState = normalizeState(req.body.deliveryState);
     if (!normalizedState) {
       return res.redirect('/checkout?orderId=' + orderId + '&error=' + encodeURIComponent('Please provide a valid state.'));
     }
 
-    /* Save delivery info */
-    order.deliveryFirstName = req.body.deliveryFirstName;
-    order.deliveryLastName = req.body.deliveryLastName;
-    order.deliveryStreet = req.body.deliveryStreet;
-    order.deliveryApt = req.body.deliveryApt || null;
-    order.deliveryCity = req.body.deliveryCity;
-    order.deliveryState = normalizedState;
-    order.deliveryZip = req.body.deliveryZip;
-    order.deliveryPhone = req.body.deliveryPhone;
-    order.deliveryNotes = req.body.deliveryNotes || null;
-    order.fulfillment = req.body.fulfillment || 'delivery';
+    var placedOrderId = null;
 
-    /* Change status from pending to placed */
-    order.status = 'placed';
-    await order.save();
+    await Order.sequelize.transaction(async function (t) {
+      var order = await Order.findOne({
+        where: { id: orderId, customerId: req.session.userId, status: 'pending' },
+        transaction: t,
+        lock: t.LOCK.UPDATE
+      });
 
-    res.redirect('/order-confirmation?orderId=' + order.id);
+      if (!order) {
+        var notFoundErr = new Error('Order not found.');
+        notFoundErr.code = 'ORDER_NOT_FOUND';
+        throw notFoundErr;
+      }
+
+      var orderItems = await OrderItem.findAll({
+        where: { orderId: order.id },
+        transaction: t,
+        lock: t.LOCK.UPDATE
+      });
+
+      if (orderItems.length === 0) {
+        var emptyErr = new Error('Your cart is empty.');
+        emptyErr.code = 'EMPTY_ORDER';
+        throw emptyErr;
+      }
+
+      var menuItemsById = {};
+      for (var orderItem of orderItems) {
+        var menuItem = await MenuItem.findOne({
+          where: { id: orderItem.menuItemId, restaurantId: order.restaurantId },
+          transaction: t,
+          lock: t.LOCK.UPDATE
+        });
+
+        if (!menuItem) {
+          var missingErr = new Error('One of the menu items is no longer available.');
+          missingErr.code = 'MENU_ITEM_MISSING';
+          throw missingErr;
+        }
+
+        if ((menuItem.quantity || 0) < orderItem.quantity) {
+          var stockErr = new Error(orderItem.name + ' is out of stock or has insufficient quantity.');
+          stockErr.code = 'INSUFFICIENT_STOCK';
+          throw stockErr;
+        }
+
+        menuItemsById[menuItem.id] = menuItem;
+      }
+
+      for (var itemToDeduct of orderItems) {
+        var menuItemToUpdate = menuItemsById[itemToDeduct.menuItemId];
+        menuItemToUpdate.quantity = (menuItemToUpdate.quantity || 0) - itemToDeduct.quantity;
+        if (menuItemToUpdate.quantity < 0) menuItemToUpdate.quantity = 0;
+        menuItemToUpdate.available = menuItemToUpdate.quantity > 0;
+        await menuItemToUpdate.save({ transaction: t });
+      }
+
+      /* Save delivery info */
+      order.deliveryFirstName = req.body.deliveryFirstName;
+      order.deliveryLastName = req.body.deliveryLastName;
+      order.deliveryStreet = req.body.deliveryStreet;
+      order.deliveryApt = req.body.deliveryApt || null;
+      order.deliveryCity = req.body.deliveryCity;
+      order.deliveryState = normalizedState;
+      order.deliveryZip = req.body.deliveryZip;
+      order.deliveryPhone = req.body.deliveryPhone;
+      order.deliveryNotes = req.body.deliveryNotes || null;
+      order.fulfillment = req.body.fulfillment || 'delivery';
+
+      /* Change status from pending to placed */
+      order.status = 'placed';
+      await order.save({ transaction: t });
+      placedOrderId = order.id;
+    });
+
+    res.redirect('/order-confirmation?orderId=' + placedOrderId);
   } catch (err) {
     console.error(err);
-    var orderId = parseInt(req.body.orderId);
     if (orderId) {
-      return res.redirect('/checkout?orderId=' + orderId + '&error=' + encodeURIComponent('Failed to place order. Please check your address fields and try again.'));
+      var message = 'Failed to place order. Please check your address fields and try again.';
+      if (err.code === 'INSUFFICIENT_STOCK' || err.code === 'MENU_ITEM_MISSING' || err.code === 'EMPTY_ORDER') {
+        message = err.message;
+      }
+      return res.redirect('/checkout?orderId=' + orderId + '&error=' + encodeURIComponent(message));
     }
     res.redirect('/cart');
   }

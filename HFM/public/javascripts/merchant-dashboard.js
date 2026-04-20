@@ -4,6 +4,9 @@ const sectionFiles = {
     'my-menu':          '/merchant-my-menu'
 };
 
+var activeSection = null;
+var myMenuRefreshTimer = null;
+
 function clearSection() {
     document.getElementById('section-content').innerHTML =
         '<div class="text-center py-5" style="color:#bbb;font-family:\'Poppins\',sans-serif;">' +
@@ -17,7 +20,50 @@ function setActiveTab(section) {
     if (tab) tab.classList.add('active');
 }
 
+function runEmbeddedScripts(container) {
+    container.querySelectorAll('script').forEach(function(oldScript) {
+        var newScript = document.createElement('script');
+        newScript.textContent = oldScript.textContent;
+        oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+}
+
+function stopMyMenuAutoRefresh() {
+    if (myMenuRefreshTimer) {
+        clearInterval(myMenuRefreshTimer);
+        myMenuRefreshTimer = null;
+    }
+}
+
+function startMyMenuAutoRefresh() {
+    stopMyMenuAutoRefresh();
+    if (activeSection !== 'my-menu') return;
+
+    myMenuRefreshTimer = setInterval(function () {
+        if (activeSection !== 'my-menu') return;
+        var modal = document.getElementById('menuItemModal');
+        if (modal && modal.classList.contains('show')) return;
+
+        fetch(sectionFiles['my-menu'])
+            .then(function (r) {
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return r.text();
+            })
+            .then(function (html) {
+                if (activeSection !== 'my-menu') return;
+                var container = document.getElementById('section-content');
+                container.innerHTML = html;
+                runEmbeddedScripts(container);
+            })
+            .catch(function () {
+                // Keep UI stable on background refresh failures.
+            });
+    }, 5000);
+}
+
 function showSection(section) {
+    activeSection = section;
+    stopMyMenuAutoRefresh();
     setActiveTab(section);
     clearSection();
     var file = sectionFiles[section];
@@ -30,11 +76,8 @@ function showSection(section) {
         .then(function(html) {
             var container = document.getElementById('section-content');
             container.innerHTML = html;
-            container.querySelectorAll('script').forEach(function(oldScript) {
-                var newScript = document.createElement('script');
-                newScript.textContent = oldScript.textContent;
-                oldScript.parentNode.replaceChild(newScript, oldScript);
-            });
+            runEmbeddedScripts(container);
+            if (section === 'my-menu') startMyMenuAutoRefresh();
         })
         .catch(function(err) {
             document.getElementById('section-content').innerHTML =
@@ -44,4 +87,8 @@ function showSection(section) {
 
 document.addEventListener('DOMContentLoaded', function() {
     showSection('current-orders');
+});
+
+window.addEventListener('beforeunload', function () {
+    stopMyMenuAutoRefresh();
 });
