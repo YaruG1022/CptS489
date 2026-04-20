@@ -1,78 +1,144 @@
-// ── Payment method ─────────────────────────────────
-function togglePaymentForm() {
-    const form = document.getElementById('add-payment-form');
-    const btn  = document.getElementById('btn-add-payment');
-    const open = form.style.display !== 'none';
-    form.style.display = open ? 'none' : 'block';
-    btn.innerHTML = open
-        ? '<i class="bi bi-plus me-1"></i>Add Payment Method'
-        : '<i class="bi bi-dash me-1"></i>Cancel';
-}
-function cancelPayment() {
-    document.getElementById('add-payment-form').style.display = 'none';
-    document.getElementById('btn-add-payment').innerHTML = '<i class="bi bi-plus me-1"></i>Add Payment Method';
-}
-function savePayment() {
-    cancelPayment();
-    showToast();
+var profile = window.__PROFILE_DATA__ || {};
+
+function safe(v) {
+    return (v === null || v === undefined || v === '') ? 'Not set' : String(v);
 }
 
-// ── Edit / view toggle ──────────────────────────────
+function initials(firstName, lastName) {
+    var f = (firstName || '').trim();
+    var l = (lastName || '').trim();
+    return ((f[0] || '') + (l[0] || '')).toUpperCase() || 'U';
+}
+
+function showError(message) {
+    var el = document.getElementById('profile-error');
+    if (!el) return;
+    if (!message) {
+        el.style.display = 'none';
+        el.textContent = '';
+        return;
+    }
+    el.textContent = message;
+    el.style.display = 'block';
+}
+
+function formatDob(dob) {
+    if (!dob) return 'Not set';
+    var d = new Date(dob);
+    if (isNaN(d.getTime())) return 'Not set';
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+function renderProfile() {
+    document.getElementById('avatar-initials').textContent = initials(profile.firstName, profile.lastName);
+    var fullName = ((profile.firstName || '') + ' ' + (profile.lastName || '')).trim();
+    document.getElementById('header-name').textContent = fullName || 'My Profile';
+
+    document.getElementById('vw-first').textContent = safe(profile.firstName);
+    document.getElementById('vw-last').textContent = safe(profile.lastName);
+    document.getElementById('vw-email').textContent = safe(profile.email);
+    document.getElementById('vw-phone').textContent = safe(profile.phone);
+    document.getElementById('vw-dob').textContent = formatDob(profile.dateOfBirth);
+
+    document.getElementById('vw-street').textContent = safe(profile.street);
+    document.getElementById('vw-suite').textContent = safe(profile.suite);
+    document.getElementById('vw-city').textContent = safe(profile.city);
+    document.getElementById('vw-state').textContent = safe(profile.state);
+    document.getElementById('vw-zip').textContent = safe(profile.zip);
+
+    document.getElementById('ed-first').value = profile.firstName || '';
+    document.getElementById('ed-last').value = profile.lastName || '';
+    document.getElementById('ed-phone').value = profile.phone || '';
+    document.getElementById('ed-dob').value = profile.dateOfBirth || '';
+
+    document.getElementById('ed-street').value = profile.street || '';
+    document.getElementById('ed-suite').value = profile.suite || '';
+    document.getElementById('ed-city').value = profile.city || '';
+    document.getElementById('ed-state').value = profile.state || '';
+    document.getElementById('ed-zip').value = profile.zip || '';
+}
+
 function enterEditMode() {
+    showError('');
     document.getElementById('view-mode').style.display = 'none';
     document.getElementById('edit-mode').style.display = 'block';
     document.getElementById('btn-edit').style.display = 'none';
 }
+
 function cancelEdit() {
+    showError('');
     document.getElementById('view-mode').style.display = '';
     document.getElementById('edit-mode').style.display = 'none';
     document.getElementById('btn-edit').style.display = '';
+    renderProfile();
 }
-function saveChanges() {
+
+function toggleAddrEdit(show) {
+    showError('');
+    document.getElementById('view-addr').style.display = show ? 'none' : '';
+    document.getElementById('edit-addr').style.display = show ? 'block' : 'none';
+    if (!show) renderProfile();
+}
+
+async function saveChanges() {
+    showError('');
+    var payload = {
+        firstName: document.getElementById('ed-first').value,
+        lastName: document.getElementById('ed-last').value,
+        phone: document.getElementById('ed-phone').value,
+        dateOfBirth: document.getElementById('ed-dob').value
+    };
+
+    var resp = await fetch('/profile/personal', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+
+    var data = await resp.json().catch(function () { return {}; });
+    if (!resp.ok) {
+        showError(data.error || 'Unable to save personal information.');
+        return;
+    }
+
+    profile = data.profile || profile;
     cancelEdit();
     showToast();
 }
 
-// ── Address edit ────────────────────────────────────
-function toggleAddrEdit(show) {
-    document.getElementById('view-addr').style.display = show ? 'none' : '';
-    document.getElementById('edit-addr').style.display = show ? 'block' : 'none';
-}
-function saveAddr() {
+async function saveAddr() {
+    showError('');
+    var payload = {
+        street: document.getElementById('ed-street').value,
+        suite: document.getElementById('ed-suite').value,
+        city: document.getElementById('ed-city').value,
+        state: document.getElementById('ed-state').value,
+        zip: document.getElementById('ed-zip').value
+    };
+
+    var resp = await fetch('/profile/address', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+
+    var data = await resp.json().catch(function () { return {}; });
+    if (!resp.ok) {
+        showError(data.error || 'Unable to save address.');
+        return;
+    }
+
+    profile = data.profile || profile;
     toggleAddrEdit(false);
     showToast();
 }
 
-// ── Password accordion ──────────────────────────────
-function togglePwd() {
-    const body    = document.getElementById('pwd-body');
-    const chevron = document.getElementById('pwd-chevron');
-    const open    = body.style.display !== 'none';
-    body.style.display    = open ? 'none' : 'block';
-    chevron.className = open ? 'bi bi-chevron-down' : 'bi bi-chevron-up';
-}
-function changePassword() {
-    const errEl   = document.getElementById('pwd-error');
-    const current = document.getElementById('pwd-current').value;
-    const newPwd  = document.getElementById('pwd-new').value;
-    const confirm = document.getElementById('pwd-confirm').value;
-    errEl.style.display = 'none';
-    if (!current) { errEl.textContent = 'Please enter your current password.'; errEl.style.display='block'; return; }
-    if (newPwd.length < 8) { errEl.textContent = 'New password must be at least 8 characters.'; errEl.style.display='block'; return; }
-    if (newPwd !== confirm) { errEl.textContent = 'Passwords do not match.'; errEl.style.display='block'; return; }
-    showToast();
-    togglePwd();
-}
-
-// ── Delete modal ────────────────────────────────────
-function confirmDelete() {
-    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    modal.show();
-}
-
-// ── Toast ───────────────────────────────────────────
 function showToast() {
-    const t = document.getElementById('save-toast');
+    var t = document.getElementById('save-toast');
     t.style.display = 'block';
-    setTimeout(() => { t.style.display = 'none'; }, 2800);
+    setTimeout(function () { t.style.display = 'none'; }, 2800);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    renderProfile();
+});

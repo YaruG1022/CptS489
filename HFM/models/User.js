@@ -51,6 +51,26 @@ User.init({
   dateOfBirth: {
     type: DataTypes.DATEONLY,
     allowNull: true
+  },
+  street: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
+  suite: {
+    type: DataTypes.STRING(100),
+    allowNull: true
+  },
+  city: {
+    type: DataTypes.STRING(100),
+    allowNull: true
+  },
+  state: {
+    type: DataTypes.STRING(2),
+    allowNull: true
+  },
+  zip: {
+    type: DataTypes.STRING(10),
+    allowNull: true
   }
 }, {
   sequelize,

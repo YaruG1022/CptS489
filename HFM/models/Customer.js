@@ -46,6 +46,10 @@ Customer.init({
     type: DataTypes.STRING(255),
     allowNull: true
   },
+  suite: {
+    type: DataTypes.STRING(100),
+    allowNull: true
+  },
   city: {
     type: DataTypes.STRING(100),
     allowNull: true

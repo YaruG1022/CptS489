@@ -48,6 +48,12 @@
         <i class="bi bi-lock me-2" style="color:var(--burnt-orange-primary);"></i>Checkout
     </h1>
 
+    <% if (errorMessage) { %>
+    <div class="alert alert-danger" style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
+        <%= errorMessage %>
+    </div>
+    <% } %>
+
     <!-- Progress steps -->
     <div class="d-flex align-items-center gap-2 mb-4" style="font-family:'Poppins',sans-serif;font-size:0.82rem;">
         <span style="color:var(--burnt-orange-primary);font-weight:600;"><i class="bi bi-check-circle-fill me-1"></i>Cart</span>
@@ -92,7 +98,7 @@
                     </div>
                     <div class="col-3">
                         <label class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:600;">State</label>
-                        <input type="text" class="form-control" name="deliveryState" value="<%= user.state || '' %>" required style="font-family:'Open Sans',sans-serif;font-size:0.88rem;border-color:#ddd;">
+                        <input type="text" class="form-control" name="deliveryState" value="<%= user.state || '' %>" required maxlength="2" placeholder="WA" style="font-family:'Open Sans',sans-serif;font-size:0.88rem;border-color:#ddd;text-transform:uppercase;">
                     </div>
                     <div class="col-4">
                         <label class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:600;">ZIP Code</label>

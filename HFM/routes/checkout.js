@@ -5,6 +5,32 @@ var Order = require('../models/Order');
 var OrderItem = require('../models/OrderItem');
 var Restaurant = require('../models/Restaurant');
 
+var STATE_NAME_TO_CODE = {
+  alabama: 'AL', alaska: 'AK', arizona: 'AZ', arkansas: 'AR', california: 'CA',
+  colorado: 'CO', connecticut: 'CT', delaware: 'DE', florida: 'FL', georgia: 'GA',
+  hawaii: 'HI', idaho: 'ID', illinois: 'IL', indiana: 'IN', iowa: 'IA',
+  kansas: 'KS', kentucky: 'KY', louisiana: 'LA', maine: 'ME', maryland: 'MD',
+  massachusetts: 'MA', michigan: 'MI', minnesota: 'MN', mississippi: 'MS', missouri: 'MO',
+  montana: 'MT', nebraska: 'NE', nevada: 'NV', 'new hampshire': 'NH', 'new jersey': 'NJ',
+  'new mexico': 'NM', 'new york': 'NY', 'north carolina': 'NC', 'north dakota': 'ND', ohio: 'OH',
+  oklahoma: 'OK', oregon: 'OR', pennsylvania: 'PA', 'rhode island': 'RI', 'south carolina': 'SC',
+  'south dakota': 'SD', tennessee: 'TN', texas: 'TX', utah: 'UT', vermont: 'VT',
+  virginia: 'VA', washington: 'WA', 'west virginia': 'WV', wisconsin: 'WI', wyoming: 'WY',
+  'district of columbia': 'DC'
+};
+
+function normalizeState(value) {
+  var raw = (value || '').trim();
+  if (!raw) return '';
+  if (raw.length === 2) return raw.toUpperCase();
+
+  var byName = STATE_NAME_TO_CODE[raw.toLowerCase()];
+  if (byName) return byName;
+
+  // Fallback to a safe 2-char value to avoid DB overflow.
+  return raw.slice(0, 2).toUpperCase();
+}
+
 /* ══════════════════════════════════════════════
    PAGE: GET /checkout?orderId=<id>
    ══════════════════════════════════════════════ */
@@ -38,7 +64,14 @@ router.get('/checkout', async function (req, res) {
 
     if (items.length === 0) return res.redirect('/cart');
 
-    res.render('checkout', { user: user, order: order, restaurant: restaurant, items: items });
+    var errorMessage = req.query.error || null;
+    res.render('checkout', {
+      user: user,
+      order: order,
+      restaurant: restaurant,
+      items: items,
+      errorMessage: errorMessage
+    });
   } catch (err) {
     console.error(err);
     res.redirect('/cart');
@@ -59,13 +92,18 @@ router.post('/checkout', async function (req, res) {
 
     if (!order) return res.redirect('/cart');
 
+    var normalizedState = normalizeState(req.body.deliveryState);
+    if (!normalizedState) {
+      return res.redirect('/checkout?orderId=' + orderId + '&error=' + encodeURIComponent('Please provide a valid state.'));
+    }
+
     /* Save delivery info */
     order.deliveryFirstName = req.body.deliveryFirstName;
     order.deliveryLastName = req.body.deliveryLastName;
     order.deliveryStreet = req.body.deliveryStreet;
     order.deliveryApt = req.body.deliveryApt || null;
     order.deliveryCity = req.body.deliveryCity;
-    order.deliveryState = req.body.deliveryState;
+    order.deliveryState = normalizedState;
     order.deliveryZip = req.body.deliveryZip;
     order.deliveryPhone = req.body.deliveryPhone;
     order.deliveryNotes = req.body.deliveryNotes || null;
@@ -78,6 +116,10 @@ router.post('/checkout', async function (req, res) {
     res.redirect('/order-confirmation?orderId=' + order.id);
   } catch (err) {
     console.error(err);
+    var orderId = parseInt(req.body.orderId);
+    if (orderId) {
+      return res.redirect('/checkout?orderId=' + orderId + '&error=' + encodeURIComponent('Failed to place order. Please check your address fields and try again.'));
+    }
     res.redirect('/cart');
   }
 });
