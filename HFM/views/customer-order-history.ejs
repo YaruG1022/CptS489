@@ -1,0 +1,76 @@
+<!-- customer-order-history.ejs — EJS fragment for customer-dashboard (no search bar) -->
+
+<div class="section-card">
+    <h2 class="section-title"><i class="bi bi-receipt me-2"></i>Order History</h2>
+
+    <% if (orders.length === 0) { %>
+    <div class="text-center py-5" style="color:#bbb;font-family:'Poppins',sans-serif;">
+        <i class="bi bi-inbox" style="font-size:2.5rem;display:block;margin-bottom:8px;"></i>
+        <div style="font-size:0.88rem;">No past orders found.</div>
+    </div>
+    <% } else { %>
+    <p style="font-family:'Open Sans',sans-serif;font-size:0.83rem;color:#888;margin-bottom:20px;">
+        <%= orders.length %> order<%= orders.length !== 1 ? 's' : '' %> total
+    </p>
+
+    <% orders.forEach(function(order) {
+       var dateStr = new Date(order.createdAt).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
+       var badgeClass = order.status === 'delivered' ? 'bg-success' : 'bg-danger';
+       var statusLabel = order.status.charAt(0).toUpperCase() + order.status.slice(1);
+    %>
+    <div class="history-item">
+        <div class="history-item-header" onclick="toggleHistory(this)">
+            <div class="restaurant-icon"><i class="bi bi-house-heart"></i></div>
+            <div class="flex-grow-1" style="min-width:0;">
+                <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">
+                    <%= order.restaurant ? order.restaurant.name : 'Restaurant' %>
+                </div>
+                <div style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">
+                    <%= dateStr %> &nbsp;·&nbsp; <%= order.items.length %> item<%= order.items.length !== 1 ? 's' : '' %>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3" style="flex-shrink:0;">
+                <strong style="font-family:'Poppins',sans-serif;color:var(--burnt-orange-primary);">$<%= parseFloat(order.total).toFixed(2) %></strong>
+                <span class="badge <%= badgeClass %>"><%= statusLabel %></span>
+                <i class="bi bi-chevron-down history-chevron"></i>
+            </div>
+        </div>
+        <div class="history-item-body">
+            <div class="pt-3">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Items</div>
+                        <ul style="font-family:'Open Sans',sans-serif;font-size:0.88rem;padding-left:18px;margin:0;">
+                            <% order.items.forEach(function(item) { %>
+                            <li><%= item.name %> &times; <%= item.quantity %> — $<%= parseFloat(item.price).toFixed(2) %></li>
+                            <% }); %>
+                        </ul>
+                        <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">
+                            Subtotal $<%= parseFloat(order.subtotal).toFixed(2) %> &nbsp;·&nbsp;
+                            Delivery $<%= parseFloat(order.deliveryFee).toFixed(2) %>
+                        </div>
+                    </div>
+                    <% if (order.fulfillment === 'delivery' && order.deliveryStreet) { %>
+                    <div class="col-md-6">
+                        <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Delivery</div>
+                        <div style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
+                            <i class="bi bi-geo-alt me-1 text-muted"></i>
+                            <%= order.deliveryStreet %><%= order.deliveryCity ? ', ' + order.deliveryCity : '' %><%= order.deliveryState ? ' ' + order.deliveryState : '' %>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% }); %>
+    <% } %>
+</div>
+
+<script>
+function toggleHistory(header) {
+    var body = header.nextElementSibling;
+    body.classList.toggle('open');
+    header.classList.toggle('open');
+}
+</script>

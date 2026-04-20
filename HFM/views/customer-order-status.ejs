@@ -1,0 +1,67 @@
+<!-- customer-order-status.ejs — EJS fragment for customer-dashboard -->
+
+<div class="section-card">
+    <h2 class="section-title"><i class="bi bi-clock-history me-2"></i>Current Order</h2>
+
+    <% if (!order) { %>
+    <div class="text-center py-5" style="color:#bbb;font-family:'Poppins',sans-serif;">
+        <i class="bi bi-bag-x" style="font-size:2.5rem;display:block;margin-bottom:8px;"></i>
+        <div style="font-size:0.88rem;">You have no recent orders.</div>
+        <a href="/browse" class="btn btn-hp mt-3" style="font-size:0.85rem;">
+            <i class="bi bi-search me-1"></i>Browse Restaurants
+        </a>
+    </div>
+    <% } else {
+       var dateStr = new Date(order.createdAt).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
+       var statusLabel = order.status.charAt(0).toUpperCase() + order.status.slice(1);
+       var statusClass = 'bg-secondary';
+       if (order.status === 'placed')    statusClass = 'bg-warning text-dark';
+       if (order.status === 'confirmed') statusClass = 'bg-primary';
+       if (order.status === 'ready')     statusClass = 'bg-info text-dark';
+       if (order.status === 'delivered') statusClass = 'bg-success';
+       if (order.status === 'cancelled') statusClass = 'bg-danger';
+    %>
+
+    <!-- Order Summary -->
+    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
+        <div>
+            <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:1.05rem;">
+                <%= restaurant ? restaurant.name : 'Restaurant' %>
+            </div>
+            <div style="font-family:'Open Sans',sans-serif;font-size:0.85rem;color:#888;margin-top:2px;">
+                Order #<%= order.id %> &nbsp;·&nbsp; <%= items.length %> item<%= items.length !== 1 ? 's' : '' %>
+            </div>
+            <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.88rem;">
+                <i class="bi bi-bag me-1 text-muted"></i>
+                <% items.forEach(function(item, idx) { %>
+                    <%= item.name %> &times;<%= item.quantity %><%= idx < items.length - 1 ? ', ' : '' %>
+                <% }); %>
+            </div>
+            <div class="mt-2">
+                <span class="badge <%= statusClass %>"><%= statusLabel %></span>
+            </div>
+        </div>
+        <div class="text-end">
+            <div class="stat-num" style="font-size:1.4rem;">$<%= parseFloat(order.total).toFixed(2) %></div>
+            <div style="font-family:'Open Sans',sans-serif;font-size:0.8rem;color:#888;">Total</div>
+            <div style="font-family:'Open Sans',sans-serif;font-size:0.78rem;color:#aaa;margin-top:4px;"><%= dateStr %></div>
+        </div>
+    </div>
+
+    <!-- Item breakdown -->
+    <div>
+        <div style="font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Order Items</div>
+        <ul style="font-family:'Open Sans',sans-serif;font-size:0.88rem;padding-left:18px;margin:0;">
+            <% items.forEach(function(item) { %>
+            <li><%= item.name %> &times; <%= item.quantity %> — $<%= parseFloat(item.price).toFixed(2) %></li>
+            <% }); %>
+        </ul>
+        <div class="mt-2" style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;">
+            Subtotal $<%= parseFloat(order.subtotal).toFixed(2) %> &nbsp;·&nbsp;
+            Delivery $<%= parseFloat(order.deliveryFee).toFixed(2) %> &nbsp;·&nbsp;
+            Tax $<%= parseFloat(order.tax).toFixed(2) %>
+        </div>
+    </div>
+
+    <% } %>
+</div>
