@@ -57,11 +57,11 @@ router.get('/customer-current-order', requireCustomer, async function (req, res)
   }
 });
 
-/* GET /customer-order-history-data — EJS fragment: delivered/cancelled orders (no search) */
+/* GET /customer-order-history-data — EJS fragment: all non-pending orders (including current) */
 router.get('/customer-order-history-data', requireCustomer, async function (req, res) {
   try {
     var orders = await Order.findAll({
-      where: { customerId: req.session.userId, status: { [Op.in]: ['delivered', 'cancelled'] } },
+      where: { customerId: req.session.userId, status: { [Op.ne]: 'pending' } },
       order: [['createdAt', 'DESC']]
     });
     var ordersWithDetails = await Promise.all(orders.map(async function (o) {

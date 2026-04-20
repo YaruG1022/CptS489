@@ -15,7 +15,12 @@
 
     <% orders.forEach(function(order) {
        var dateStr = new Date(order.createdAt).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
-       var badgeClass = order.status === 'delivered' ? 'bg-success' : 'bg-danger';
+         var badgeClass = 'bg-secondary';
+         if (order.status === 'placed') badgeClass = 'bg-warning text-dark';
+         if (order.status === 'confirmed') badgeClass = 'bg-primary';
+         if (order.status === 'ready') badgeClass = 'bg-info text-dark';
+         if (order.status === 'delivered') badgeClass = 'bg-success';
+         if (order.status === 'cancelled') badgeClass = 'bg-danger';
        var statusLabel = order.status.charAt(0).toUpperCase() + order.status.slice(1);
     %>
     <div class="history-item">

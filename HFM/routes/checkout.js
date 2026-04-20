@@ -6,6 +6,8 @@ var OrderItem = require('../models/OrderItem');
 var Restaurant = require('../models/Restaurant');
 var MenuItem = require('../models/MenuItem');
 
+var AUTO_DELIVER_DELAY_MS = 10000;
+
 var STATE_NAME_TO_CODE = {
   alabama: 'AL', alaska: 'AK', arizona: 'AZ', arkansas: 'AR', california: 'CA',
   colorado: 'CO', connecticut: 'CT', delaware: 'DE', florida: 'FL', georgia: 'GA',
@@ -30,6 +32,19 @@ function normalizeState(value) {
 
   // Fallback to a safe 2-char value to avoid DB overflow.
   return raw.slice(0, 2).toUpperCase();
+}
+
+function scheduleAutoDeliver(orderId) {
+  setTimeout(async function () {
+    try {
+      // Only auto-complete orders that are still in placed status.
+      await Order.update({ status: 'delivered' }, {
+        where: { id: orderId, status: 'placed' }
+      });
+    } catch (err) {
+      console.error('Auto deliver failed for order ' + orderId + ':', err.message);
+    }
+  }, AUTO_DELIVER_DELAY_MS);
 }
 
 /* ══════════════════════════════════════════════
@@ -170,6 +185,7 @@ router.post('/checkout', async function (req, res) {
       placedOrderId = order.id;
     });
 
+    scheduleAutoDeliver(placedOrderId);
     res.redirect('/order-confirmation?orderId=' + placedOrderId);
   } catch (err) {
     console.error(err);

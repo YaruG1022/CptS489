@@ -3,6 +3,9 @@ const sectionFiles = {
     'history':      '/customer-order-history-data'
 };
 
+let activeSection = null;
+let currentOrderRefreshTimer = null;
+
 function clearSection() {
     document.getElementById('section-content').innerHTML =
         '<div class="text-center py-5" style="color:#bbb;font-family:\'Poppins\',sans-serif;">' +
@@ -17,7 +20,48 @@ function setActiveTab(section) {
     if (tab) tab.classList.add('active');
 }
 
+function runEmbeddedScripts(container) {
+    container.querySelectorAll('script').forEach(oldScript => {
+        const newScript = document.createElement('script');
+        newScript.textContent = oldScript.textContent;
+        oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+}
+
+function stopCurrentOrderAutoRefresh() {
+    if (currentOrderRefreshTimer) {
+        clearInterval(currentOrderRefreshTimer);
+        currentOrderRefreshTimer = null;
+    }
+}
+
+function startCurrentOrderAutoRefresh() {
+    stopCurrentOrderAutoRefresh();
+    if (activeSection !== 'order-status') return;
+
+    currentOrderRefreshTimer = setInterval(() => {
+        if (activeSection !== 'order-status') return;
+        const file = sectionFiles['order-status'];
+        fetch(file)
+            .then(r => {
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return r.text();
+            })
+            .then(html => {
+                if (activeSection !== 'order-status') return;
+                const container = document.getElementById('section-content');
+                container.innerHTML = html;
+                runEmbeddedScripts(container);
+            })
+            .catch(() => {
+                // Keep UI stable on background refresh failures.
+            });
+    }, 5000);
+}
+
 function showSection(section) {
+    activeSection = section;
+    stopCurrentOrderAutoRefresh();
     setActiveTab(section);
     clearSection();
     const file = sectionFiles[section];
@@ -30,12 +74,8 @@ function showSection(section) {
         .then(html => {
             const container = document.getElementById('section-content');
             container.innerHTML = html;
-            // Execute any <script> tags injected with innerHTML
-            container.querySelectorAll('script').forEach(oldScript => {
-                const newScript = document.createElement('script');
-                newScript.textContent = oldScript.textContent;
-                oldScript.parentNode.replaceChild(newScript, oldScript);
-            });
+            runEmbeddedScripts(container);
+            if (section === 'order-status') startCurrentOrderAutoRefresh();
         })
         .catch(err => {
             document.getElementById('section-content').innerHTML =
@@ -44,3 +84,5 @@ function showSection(section) {
 }
 
 document.addEventListener('DOMContentLoaded', () => showSection('order-status'));
+
+window.addEventListener('beforeunload', stopCurrentOrderAutoRefresh);
