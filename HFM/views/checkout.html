@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HomePlate â€?Checkout</title>
+    <title>HomePlate ï¿½?Checkout</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,6 +18,10 @@
 <nav class="navbar navbar-expand-lg" style="background-color:var(--burnt-orange-primary);padding:0 1.5rem;">
     <a class="navbar-brand" href="browse.html" style="font-family:'Pacifico',cursive;color:#fff;font-size:1.7rem;letter-spacing:.02em;">HomePlate</a>
     <div class="ms-auto d-flex align-items-center gap-3">
+        <a href="/browse" class="btn btn-sm"
+           style="background:rgba(255,255,255,.15);color:#fff;font-family:'Poppins',sans-serif;font-size:0.85rem;border-radius:20px;padding:4px 14px;border:1px solid rgba(255,255,255,.3);">
+            <i class="bi bi-search me-1"></i>Browse
+        </a>
         <a href="customer-dashboard.html" class="btn btn-sm"
            style="background:rgba(255,255,255,.15);color:#fff;font-family:'Poppins',sans-serif;font-size:0.85rem;border-radius:20px;padding:4px 14px;border:1px solid rgba(255,255,255,.3);">
             <i class="bi bi-grid me-1"></i>Dashboard
@@ -74,7 +78,7 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:600;">Apt / Suite <span style="font-weight:400;color:#999;">(optional)</span></label>
-                        <input type="text" class="form-control" placeholder="Apt, suite, unitâ€? style="font-family:'Open Sans',sans-serif;font-size:0.88rem;border-color:#ddd;">
+                        <input type="text" class="form-control" placeholder="Apt, suite, unitï¿½? style="font-family:'Open Sans',sans-serif;font-size:0.88rem;border-color:#ddd;">
                     </div>
                     <div class="col-5">
                         <label class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:600;">City</label>
@@ -94,7 +98,7 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:600;">Delivery Notes <span style="font-weight:400;color:#999;">(optional)</span></label>
-                        <input type="text" class="form-control" placeholder="E.g. Leave at door, ring bell twiceâ€? style="font-family:'Open Sans',sans-serif;font-size:0.88rem;border-color:#ddd;">
+                        <input type="text" class="form-control" placeholder="E.g. Leave at door, ring bell twiceï¿½? style="font-family:'Open Sans',sans-serif;font-size:0.88rem;border-color:#ddd;">
                     </div>
                 </div>
             </div>
@@ -109,7 +113,7 @@
                     <input type="radio" name="fulfillment" checked style="margin-top:3px;accent-color:var(--burnt-orange-primary);">
                     <div>
                         <div class="fulfillment-option-title"><i class="bi bi-bicycle me-1"></i>Delivery by Driver</div>
-                        <div class="fulfillment-option-desc">Estimated arrival: 25â€?5 min Â· $2.99 delivery fee</div>
+                        <div class="fulfillment-option-desc">Estimated arrival: 25ï¿½?5 min Â· $2.99 delivery fee</div>
                     </div>
                 </label>
 
@@ -122,46 +126,21 @@
                 </label>
             </div>
 
-            <!-- 3. Payment Method -->
-            <div class="checkout-card">
+            <!-- 3. Payment Method (display only) -->
+            <div class="checkout-card" style="pointer-events:none;">
                 <div class="checkout-section-label">
                     <i class="bi bi-credit-card me-1"></i>Payment Method
                 </div>
 
-                <!-- Saved card option -->
-                <div style="background:var(--cream-primary);border-radius:10px;padding:14px 16px;margin-bottom:14px;border:1.5px solid var(--burnt-orange-primary);">
+                <!-- Saved card -->
+                <div style="background:var(--cream-primary);border-radius:10px;padding:14px 16px;border:1.5px solid var(--burnt-orange-primary);">
                     <div class="d-flex align-items-center gap-3">
-                        <input type="radio" name="payment" checked style="accent-color:var(--burnt-orange-primary);">
                         <i class="bi bi-credit-card-2-front" style="font-size:22px;color:var(--burnt-orange-primary);"></i>
                         <div>
                             <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;">Visa ending in Â·Â·Â·Â· 4242</div>
                             <div style="font-family:'Open Sans',sans-serif;font-size:0.78rem;color:#888;">Expires 08/28 Â· Default card</div>
                         </div>
                         <span class="badge ms-auto" style="background:rgba(197,90,58,.1);color:var(--burnt-orange-primary);font-family:'Poppins',sans-serif;font-size:0.7rem;">Saved</span>
-                    </div>
-                </div>
-
-                <!-- New card option -->
-                <div style="border:1.5px solid #e4e4e4;border-radius:10px;padding:14px 16px;">
-                    <div class="d-flex align-items-center gap-3 mb-3">
-                        <input type="radio" name="payment" style="accent-color:var(--burnt-orange-primary);">
-                        <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--charcoal-gray-secondary);">
-                            <i class="bi bi-plus-circle me-1"></i>Add New Card
-                        </div>
-                    </div>
-                    <div class="row g-2" style="opacity:0.4;pointer-events:none;">
-                        <div class="col-12">
-                            <input type="text" class="form-control form-control-sm" placeholder="Card number" style="font-family:'Open Sans',sans-serif;font-size:0.85rem;border-color:#ddd;">
-                        </div>
-                        <div class="col-6">
-                            <input type="text" class="form-control form-control-sm" placeholder="MM / YY" style="font-family:'Open Sans',sans-serif;font-size:0.85rem;border-color:#ddd;">
-                        </div>
-                        <div class="col-6">
-                            <input type="text" class="form-control form-control-sm" placeholder="CVV" style="font-family:'Open Sans',sans-serif;font-size:0.85rem;border-color:#ddd;">
-                        </div>
-                        <div class="col-12">
-                            <input type="text" class="form-control form-control-sm" placeholder="Name on card" style="font-family:'Open Sans',sans-serif;font-size:0.85rem;border-color:#ddd;">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -186,13 +165,6 @@
 
                 <hr style="border-color:#f0e8d8;">
 
-                <!-- Promo code -->
-                <div class="d-flex gap-2 mb-3">
-                    <input type="text" class="form-control form-control-sm" placeholder="Promo / discount code"
-                        style="font-family:'Open Sans',sans-serif;font-size:0.85rem;border-color:#ddd;">
-                    <button class="btn btn-sm btn-hp-outline" style="white-space:nowrap;font-size:0.82rem;padding:5px 14px;">Apply</button>
-                </div>
-
                 <div class="order-summary-row"><span>Subtotal</span><span>$44.00</span></div>
                 <div class="order-summary-row"><span>Delivery fee</span><span>$2.99</span></div>
                 <div class="order-summary-row"><span>Tax (8.9%)</span><span>$3.91</span></div>
@@ -201,17 +173,15 @@
                 <!-- ETA -->
                 <div style="background:var(--cream-primary);border-radius:8px;padding:10px 14px;margin-top:14px;font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#555;">
                     <i class="bi bi-clock me-1" style="color:var(--burnt-orange-primary);"></i>
-                    Estimated delivery: <strong>25â€?5 min</strong> after confirmation
+                    Estimated delivery: <strong>25ï¿½?5 min</strong> after confirmation
                 </div>
 
                 <!-- Place Order -->
                 <a href="order-confirmation.html" class="btn btn-hp w-100 mt-3" style="padding:13px;font-size:0.95rem;">
-                    <i class="bi bi-lock me-1"></i>Place Order â€?$50.90
+                    <i class="bi bi-lock me-1"></i>Place Order ï¿½?$50.90
                 </a>
 
-                <div style="text-align:center;font-family:'Open Sans',sans-serif;font-size:0.75rem;color:#aaa;margin-top:10px;">
-                    <i class="bi bi-shield-check me-1"></i>Payment secured by 256-bit SSL encryption
-                </div>
+
             </div>
         </div><!-- /order summary -->
 

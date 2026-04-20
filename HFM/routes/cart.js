@@ -21,7 +21,7 @@ async function recalcOrder(order) {
   items.forEach(function (i) { subtotal += parseFloat(i.price) * i.quantity; });
   var tax = subtotal * 0.089;
   var deliveryFee = 2.99;
-  var total = subtotal + tax + deliveryFee - parseFloat(order.discount || 0);
+  var total = subtotal + tax + deliveryFee;
   order.subtotal = Math.round(subtotal * 100) / 100;
   order.tax = Math.round(tax * 100) / 100;
   order.deliveryFee = deliveryFee;

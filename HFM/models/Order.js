@@ -55,15 +55,6 @@ Order.init({
     allowNull: false,
     defaultValue: 0.00
   },
-  promoCode: {
-    type: DataTypes.STRING(50),
-    allowNull: true
-  },
-  discount: {
-    type: DataTypes.DECIMAL(10, 2),
-    allowNull: false,
-    defaultValue: 0.00
-  },
   fulfillment: {
     type: DataTypes.ENUM('delivery', 'pickup'),
     allowNull: false,
