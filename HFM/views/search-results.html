@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HomePlate �?Search Results</title>
+    <title>HomePlate - Search Results</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<!-- ── Navigation Bar ─────────────────────────── -->
+<!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg" style="background-color:var(--burnt-orange-primary);padding:0 1.5rem;">
     <a class="navbar-brand" href="browse.html" style="font-family:'Pacifico',cursive;color:#fff;font-size:1.7rem;letter-spacing:.02em;">HomePlate</a>
     <div class="ms-auto d-flex align-items-center gap-3">
@@ -32,23 +32,20 @@
     </div>
 </nav>
 
-<!-- ── Search Bar Strip ───────────────────────── -->
-<div style="background:var(--cream-primary);padding:18px 24px;border-bottom:1px solid #eadfc8;">
-    <div style="max-width:1200px;margin:0 auto;">
-        <form action="search-results.html" method="get" class="d-flex align-items-center gap-3 flex-wrap">
-            <div class="browse-search-bar" style="max-width:540px;margin:0;box-shadow:none;border:2px solid #ddd;">
-                <i class="bi bi-search" style="color:#aaa;font-size:17px;flex-shrink:0;"></i>
-                <input type="text" name="q" value="Italian" placeholder="Search for dishes, cuisines, or cooks�?>
-                <button type="submit" class="search-btn">Search</button>
-            </div>
-            <a href="browse.html" style="font-family:'Poppins',sans-serif;font-size:0.85rem;color:#888;text-decoration:none;">
-                <i class="bi bi-x me-1"></i>Clear
-            </a>
-        </form>
-    </div>
+<!-- Hero Search (same as browse) -->
+<div class="browse-hero">
+    <h2>What are you craving today?</h2>
+    <p>Discover homemade meals from talented cooks right in your neighborhood.</p>
+    <form action="search-results.html" method="get">
+        <div class="browse-search-bar">
+            <i class="bi bi-search" style="color:#aaa;font-size:18px;flex-shrink:0;"></i>
+            <input type="text" name="q" value="Italian" placeholder="Search for dishes, cuisines, or cooks">
+            <button type="submit" class="search-btn">Search</button>
+        </div>
+    </form>
 </div>
 
-<!-- ── Category Pills ────────────────────────── -->
+<!-- Category Pill Strip -->
 <div class="category-strip">
     <a href="search-results.html?q=all"       class="filter-pill"><i class="bi bi-grid"></i> All</a>
     <a href="search-results.html?q=italian"   class="filter-pill active">Italian</a>
@@ -59,228 +56,129 @@
     <a href="search-results.html?q=thai"      class="filter-pill">Thai</a>
     <a href="search-results.html?q=desserts"  class="filter-pill">Desserts</a>
     <a href="search-results.html?q=vegan"     class="filter-pill"><i class="bi bi-leaf"></i> Vegan</a>
+    <a href="search-results.html?q=breakfast" class="filter-pill">Breakfast</a>
 </div>
 
-<!-- ── Main Content ──────────────────────────── -->
+<!-- Main Content -->
 <div class="browse-page">
-    <div class="row g-4">
 
-        <!-- ── Filter Sidebar ─────────────────── -->
-        <div class="col-md-3">
-            <div class="filter-sidebar">
-                <div class="filter-sidebar-title"><i class="bi bi-funnel me-1"></i>Filters</div>
-
-                <div class="filter-group-label">Cuisine</div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="f-italian" checked>
-                    <label class="form-check-label" for="f-italian">Italian (4)</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="f-indian">
-                    <label class="form-check-label" for="f-indian">Indian (3)</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="f-korean">
-                    <label class="form-check-label" for="f-korean">Korean (2)</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="f-mexican">
-                    <label class="form-check-label" for="f-mexican">Mexican (2)</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="f-thai">
-                    <label class="form-check-label" for="f-thai">Thai (2)</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="f-french">
-                    <label class="form-check-label" for="f-french">French (1)</label>
-                </div>
-
-                <div class="filter-group-label">Minimum Rating</div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="radio" name="rating" id="r-any" checked>
-                    <label class="form-check-label" for="r-any">Any</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="radio" name="rating" id="r-3">
-                    <label class="form-check-label" for="r-3">�?3.0+</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="radio" name="rating" id="r-4">
-                    <label class="form-check-label" for="r-4">�?4.0+</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="radio" name="rating" id="r-45">
-                    <label class="form-check-label" for="r-45">�?4.5+</label>
-                </div>
-
-                <div class="filter-group-label">Price Range</div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="p1">
-                    <label class="form-check-label" for="p1">$ Under $15</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="p2" checked>
-                    <label class="form-check-label" for="p2">$$ $15�?30</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="p3">
-                    <label class="form-check-label" for="p3">$$$ $30+</label>
-                </div>
-
-                <div class="filter-group-label">Dietary</div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="d-veg">
-                    <label class="form-check-label" for="d-veg">Vegetarian</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="d-vegan">
-                    <label class="form-check-label" for="d-vegan">Vegan</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="d-gf">
-                    <label class="form-check-label" for="d-gf">Gluten-Free</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="checkbox" id="d-halal">
-                    <label class="form-check-label" for="d-halal">Halal</label>
-                </div>
-
-                <div class="filter-group-label">Delivery Time</div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="radio" name="time" id="t-any" checked>
-                    <label class="form-check-label" for="t-any">Any</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="radio" name="time" id="t-30">
-                    <label class="form-check-label" for="t-30">Under 30 min</label>
-                </div>
-                <div class="form-check mb-1">
-                    <input class="form-check-input" type="radio" name="time" id="t-45">
-                    <label class="form-check-label" for="t-45">Under 45 min</label>
-                </div>
-
-                <button class="btn btn-hp w-100 mt-3" style="font-size:0.88rem;">Apply Filters</button>
-                <button class="btn btn-hp-outline w-100 mt-2" style="font-size:0.88rem;">Clear All</button>
-            </div>
-        </div><!-- /filter sidebar -->
-
-        <!-- ── Results ────────────────────────── -->
-        <div class="col-md-9">
-
-            <!-- Result header -->
-            <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
-                <div style="font-family:'Poppins',sans-serif;font-size:0.9rem;color:#555;">
-                    Showing <strong>6 results</strong> for "<strong>Italian</strong>"
-                </div>
-                <select class="form-select form-select-sm" style="max-width:190px;font-family:'Poppins',sans-serif;font-size:0.83rem;">
+    <!-- Results -->
+    <div>
+        <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+            <h3 class="browse-section-title mb-0">
+                <i class="bi bi-search me-1"></i>Showing 6 results for "Italian"
+            </h3>
+            <div class="d-flex align-items-center gap-2">
+                <a href="browse.html" style="font-family:'Poppins',sans-serif;font-size:0.85rem;color:#888;text-decoration:none;">
+                    <i class="bi bi-x me-1"></i>Clear Search
+                </a>
+                <select class="form-select form-select-sm" style="max-width:170px;font-family:'Poppins',sans-serif;font-size:0.82rem;">
                     <option>Sort: Relevance</option>
-                    <option>Sort: Rating �?/option>
+                    <option>Sort: Rating</option>
                     <option>Sort: Delivery Time</option>
-                    <option>Sort: Price �?/option>
-                    <option>Sort: Price �?/option>
+                    <option>Sort: Price (Low)</option>
+                    <option>Sort: Price (High)</option>
                 </select>
             </div>
+        </div>
 
-            <div class="row g-3">
+        <div class="row g-3">
 
-                <div class="col-sm-6 col-lg-4">
-                    <a href="restaurant-detail.html" class="restaurant-card position-relative">
-                        <div class="restaurant-card-img" style="background:#f5ede0;"></div>
-                        <span class="restaurant-card-badge">Best Match</span>
-                        <div class="restaurant-card-body">
-                            <div class="restaurant-card-name">Grandma Maria's Kitchen</div>
-                            <div class="restaurant-card-meta">Italian · �?4.9 (128 reviews)</div>
-                            <div class="restaurant-card-footer">
-                                <span><i class="bi bi-clock me-1"></i>25�?5 min</span>
-                                <span>$2.99 delivery</span>
-                            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="restaurant-detail.html" class="restaurant-card position-relative">
+                    <div class="restaurant-card-img" style="background:#f5ede0;"></div>
+                    <span class="restaurant-card-badge">Best Match</span>
+                    <div class="restaurant-card-body">
+                        <div class="restaurant-card-name">Grandma Maria's Kitchen</div>
+                        <div class="restaurant-card-meta">Italian - 4.9 (128 reviews)</div>
+                        <div class="restaurant-card-footer">
+                            <span><i class="bi bi-clock me-1"></i>25-35 min</span>
+                            <span>$2.99 delivery</span>
                         </div>
-                    </a>
-                </div>
-
-                <div class="col-sm-6 col-lg-4">
-                    <a href="restaurant-detail.html" class="restaurant-card">
-                        <div class="restaurant-card-img" style="background:#ede8f5;"></div>
-                        <div class="restaurant-card-body">
-                            <div class="restaurant-card-name">Le Petit Paris by Claire</div>
-                            <div class="restaurant-card-meta">French-Italian · �?4.9 (76 reviews)</div>
-                            <div class="restaurant-card-footer">
-                                <span><i class="bi bi-clock me-1"></i>35�?5 min</span>
-                                <span>$3.49 delivery</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-sm-6 col-lg-4">
-                    <a href="restaurant-detail.html" class="restaurant-card">
-                        <div class="restaurant-card-img" style="background:#eeeae4;"></div>
-                        <div class="restaurant-card-body">
-                            <div class="restaurant-card-name">Nonna's Woodfire Pizza</div>
-                            <div class="restaurant-card-meta">Italian · �?4.6 (52 reviews)</div>
-                            <div class="restaurant-card-footer">
-                                <span><i class="bi bi-clock me-1"></i>30�?5 min</span>
-                                <span>$2.49 delivery</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-sm-6 col-lg-4">
-                    <a href="restaurant-detail.html" class="restaurant-card">
-                        <div class="restaurant-card-img" style="background:#f0e8e0;"></div>
-                        <div class="restaurant-card-body">
-                            <div class="restaurant-card-name">Tuscan Table by Marco</div>
-                            <div class="restaurant-card-meta">Italian · �?4.4 (31 reviews)</div>
-                            <div class="restaurant-card-footer">
-                                <span><i class="bi bi-clock me-1"></i>40�?5 min</span>
-                                <span>$1.99 delivery</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-sm-6 col-lg-4">
-                    <a href="restaurant-detail.html" class="restaurant-card">
-                        <div class="restaurant-card-img" style="background:#f5f0e8;"></div>
-                        <div class="restaurant-card-body">
-                            <div class="restaurant-card-name">Risotto Bar by Sofia</div>
-                            <div class="restaurant-card-meta">Italian · �?4.7 (64 reviews)</div>
-                            <div class="restaurant-card-footer">
-                                <span><i class="bi bi-clock me-1"></i>25�?0 min</span>
-                                <span>$2.99 delivery</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-sm-6 col-lg-4">
-                    <a href="restaurant-detail.html" class="restaurant-card">
-                        <div class="restaurant-card-img" style="background:#f0eeea;"></div>
-                        <div class="restaurant-card-body">
-                            <div class="restaurant-card-name">Dolce Vita Desserts</div>
-                            <div class="restaurant-card-meta">Italian Desserts · �?4.8 (43 reviews)</div>
-                            <div class="restaurant-card-footer">
-                                <span><i class="bi bi-clock me-1"></i>20�?0 min</span>
-                                <span>Free delivery</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-            </div><!-- /results row -->
-
-            <!-- No more results message -->
-            <div class="text-center mt-4 pb-2" style="font-family:'Open Sans',sans-serif;font-size:0.85rem;color:#aaa;">
-                <i class="bi bi-check-circle me-1"></i>Showing all 6 results for "Italian"
+                    </div>
+                </a>
             </div>
 
-        </div><!-- /results col -->
-    </div><!-- /row -->
-</div><!-- /browse-page -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="restaurant-detail.html" class="restaurant-card">
+                    <div class="restaurant-card-img" style="background:#ede8f5;"></div>
+                    <div class="restaurant-card-body">
+                        <div class="restaurant-card-name">Le Petit Paris by Claire</div>
+                        <div class="restaurant-card-meta">French-Italian - 4.9 (76 reviews)</div>
+                        <div class="restaurant-card-footer">
+                            <span><i class="bi bi-clock me-1"></i>35-45 min</span>
+                            <span>$3.49 delivery</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="restaurant-detail.html" class="restaurant-card">
+                    <div class="restaurant-card-img" style="background:#eeeae4;"></div>
+                    <div class="restaurant-card-body">
+                        <div class="restaurant-card-name">Nonna's Woodfire Pizza</div>
+                        <div class="restaurant-card-meta">Italian - 4.6 (52 reviews)</div>
+                        <div class="restaurant-card-footer">
+                            <span><i class="bi bi-clock me-1"></i>30-45 min</span>
+                            <span>$2.49 delivery</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="restaurant-detail.html" class="restaurant-card">
+                    <div class="restaurant-card-img" style="background:#f0e8e0;"></div>
+                    <div class="restaurant-card-body">
+                        <div class="restaurant-card-name">Tuscan Table by Marco</div>
+                        <div class="restaurant-card-meta">Italian - 4.4 (31 reviews)</div>
+                        <div class="restaurant-card-footer">
+                            <span><i class="bi bi-clock me-1"></i>40-55 min</span>
+                            <span>$1.99 delivery</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="restaurant-detail.html" class="restaurant-card">
+                    <div class="restaurant-card-img" style="background:#f5f0e8;"></div>
+                    <div class="restaurant-card-body">
+                        <div class="restaurant-card-name">Risotto Bar by Sofia</div>
+                        <div class="restaurant-card-meta">Italian - 4.7 (64 reviews)</div>
+                        <div class="restaurant-card-footer">
+                            <span><i class="bi bi-clock me-1"></i>25-30 min</span>
+                            <span>$2.99 delivery</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="restaurant-detail.html" class="restaurant-card">
+                    <div class="restaurant-card-img" style="background:#f0eeea;"></div>
+                    <div class="restaurant-card-body">
+                        <div class="restaurant-card-name">Dolce Vita Desserts</div>
+                        <div class="restaurant-card-meta">Italian Desserts - 4.8 (43 reviews)</div>
+                        <div class="restaurant-card-footer">
+                            <span><i class="bi bi-clock me-1"></i>20-30 min</span>
+                            <span>Free delivery</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- End of results -->
+        <div class="text-center mt-4 pb-2" style="font-family:'Open Sans',sans-serif;font-size:0.85rem;color:#aaa;">
+            <i class="bi bi-check-circle me-1"></i>Showing all 6 results for "Italian"
+        </div>
+    </div>
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

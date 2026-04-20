@@ -1,20 +1,24 @@
 var express = require('express');
 var router = express.Router();
 var MenuItem = require('../models/MenuItem');
+var Restaurant = require('../models/Restaurant');
 
-/* Middleware: require logged-in cook */
+/* Middleware: require logged-in cook with a selected restaurant */
 function requireCook(req, res, next) {
   if (!req.session || !req.session.userId || req.session.role !== 'cook') {
     return res.status(401).json({ error: 'Unauthorized' });
   }
+  if (!req.session.restaurantId) {
+    return res.status(400).json({ error: 'No restaurant selected.' });
+  }
   next();
 }
 
-/* GET /api/menu — list current merchant's menu items */
+/* GET /api/menu — list menu items for the selected restaurant */
 router.get('/menu', requireCook, async function (req, res) {
   try {
     var items = await MenuItem.findAll({
-      where: { userId: req.session.userId },
+      where: { restaurantId: req.session.restaurantId },
       order: [['createdAt', 'DESC']]
     });
     res.json(items);
@@ -24,7 +28,7 @@ router.get('/menu', requireCook, async function (req, res) {
   }
 });
 
-/* POST /api/menu — create a new menu item */
+/* POST /api/menu — create a new menu item for the selected restaurant */
 router.post('/menu', requireCook, async function (req, res) {
   try {
     var { name, price, quantity, category, description } = req.body;
@@ -37,7 +41,8 @@ router.post('/menu', requireCook, async function (req, res) {
       quantity: parseInt(quantity) || 0,
       category: category || null,
       description: description || null,
-      userId: req.session.userId
+      userId: req.session.userId,
+      restaurantId: req.session.restaurantId
     });
     res.status(201).json(item);
   } catch (err) {
@@ -46,11 +51,11 @@ router.post('/menu', requireCook, async function (req, res) {
   }
 });
 
-/* PUT /api/menu/:id — update a menu item */
+/* PUT /api/menu/:id — update a menu item (must belong to selected restaurant) */
 router.put('/menu/:id', requireCook, async function (req, res) {
   try {
     var item = await MenuItem.findOne({
-      where: { id: req.params.id, userId: req.session.userId }
+      where: { id: req.params.id, restaurantId: req.session.restaurantId }
     });
     if (!item) {
       return res.status(404).json({ error: 'Menu item not found.' });
@@ -69,11 +74,11 @@ router.put('/menu/:id', requireCook, async function (req, res) {
   }
 });
 
-/* DELETE /api/menu/:id — delete a menu item */
+/* DELETE /api/menu/:id — delete a menu item (must belong to selected restaurant) */
 router.delete('/menu/:id', requireCook, async function (req, res) {
   try {
     var item = await MenuItem.findOne({
-      where: { id: req.params.id, userId: req.session.userId }
+      where: { id: req.params.id, restaurantId: req.session.restaurantId }
     });
     if (!item) {
       return res.status(404).json({ error: 'Menu item not found.' });

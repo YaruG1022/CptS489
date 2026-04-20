@@ -56,6 +56,10 @@ MenuItem.init({
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  restaurantId: {
+    type: DataTypes.INTEGER,
+    allowNull: true
   }
 }, {
   sequelize,

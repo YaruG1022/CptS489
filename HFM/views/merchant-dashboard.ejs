@@ -51,14 +51,76 @@
     <!-- Main content -->
     <main class="main-content">
 
-        <!-- Page title -->
+<% if (!restaurant) { %>
+        <!-- ========== RESTAURANT PICKER ========== -->
         <div class="mb-4">
             <h1 style="font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:700;color:var(--charcoal-gray-secondary);margin:0;">
-                Merchant Dashboard
+                Select a Restaurant
             </h1>
             <p style="font-family:'Open Sans',sans-serif;font-size:0.88rem;color:#888;margin:4px 0 0;">
-                Manage your orders and menu items.
+                Choose an existing restaurant or create a new one.
             </p>
+        </div>
+
+        <% if (restaurants.length > 0) { %>
+        <div class="row g-3 mb-4">
+            <% restaurants.forEach(function(r) { %>
+            <div class="col-12 col-md-6">
+                <a href="/merchant-dashboard?r=<%= r.id %>" class="text-decoration-none">
+                    <div class="section-card" style="cursor:pointer;transition:box-shadow .15s,transform .15s;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div style="width:48px;height:48px;border-radius:10px;background:rgba(197,90,58,.10);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <i class="bi bi-shop" style="font-size:22px;color:var(--burnt-orange-primary);"></i>
+                            </div>
+                            <div>
+                                <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1rem;color:var(--charcoal-gray-secondary);"><%= r.name %></div>
+                                <div style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;"><i class="bi bi-geo-alt me-1"></i><%= r.address %></div>
+                            </div>
+                            <i class="bi bi-chevron-right ms-auto" style="font-size:1.2rem;color:#ccc;"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <% }); %>
+        </div>
+        <% } %>
+
+        <!-- Create new restaurant -->
+        <div class="section-card">
+            <h3 style="font-family:'Poppins',sans-serif;font-size:1.05rem;font-weight:600;color:var(--charcoal-gray-secondary);margin-bottom:16px;">
+                <i class="bi bi-plus-circle me-2" style="color:var(--burnt-orange-primary);"></i>Create New Restaurant
+            </h3>
+            <form method="POST" action="/merchant-restaurant">
+                <div class="mb-3">
+                    <label class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.85rem;font-weight:500;">Restaurant Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="e.g. Mom's Kitchen" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" style="font-family:'Poppins',sans-serif;font-size:0.85rem;font-weight:500;">Address</label>
+                    <input type="text" class="form-control" name="address" placeholder="e.g. 123 Main St, Pullman, WA 99163" required>
+                </div>
+                <button type="submit" class="btn btn-hp">
+                    <i class="bi bi-plus-lg me-1"></i>Create Restaurant
+                </button>
+            </form>
+        </div>
+
+<% } else { %>
+        <!-- ========== DASHBOARD (restaurant selected) ========== -->
+
+        <!-- Page title with restaurant switcher -->
+        <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+            <div>
+                <h1 style="font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:700;color:var(--charcoal-gray-secondary);margin:0;">
+                    <%= restaurant.name %>
+                </h1>
+                <p style="font-family:'Open Sans',sans-serif;font-size:0.82rem;color:#888;margin:4px 0 0;">
+                    <i class="bi bi-geo-alt me-1"></i><%= restaurant.address %>
+                </p>
+            </div>
+            <a href="/merchant-dashboard?switch=1" class="btn btn-sm btn-hp-outline">
+                <i class="bi bi-arrow-left-right me-1"></i>Switch Restaurant
+            </a>
         </div>
 
         <!-- Stat cards -->
@@ -121,12 +183,15 @@
                 <div class="mt-2" style="font-size:0.88rem;">Loading...</div>
             </div>
         </div>
+<% } %>
 
     </main>
 </div>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<% if (restaurant) { %>
 <script src="/javascripts/merchant-dashboard.js"></script>
+<% } %>
 </body>
 </html>
