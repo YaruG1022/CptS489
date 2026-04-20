@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
 var menuRouter = require('./routes/menu');
 var merchantRouter = require('./routes/merchant');
+var browseRouter = require('./routes/browse');
 var sequelize = require('./db');
 
 var app = express();
@@ -36,6 +37,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', authRouter);
 app.use('/', merchantRouter);
+app.use('/', browseRouter);
 app.use('/api', menuRouter);
 
 // Sync database tables
