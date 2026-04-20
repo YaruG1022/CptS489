@@ -1,7 +1,7 @@
 const sectionFiles = {
     'current-orders': 'merchant-current-orders.html',
     'all-orders':     'merchant-all-orders.html',
-    'my-menu':        'merchant-my-menu.html'
+    'my-menu':        '/merchant-my-menu'
 };
 
 function clearSection() {

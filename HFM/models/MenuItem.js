@@ -48,6 +48,11 @@ MenuItem.init({
     allowNull: false,
     defaultValue: true
   },
+  quantity: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false

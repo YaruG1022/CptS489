@@ -62,9 +62,13 @@ router.post('/login', async function (req, res) {
       return res.render('login', { error: 'Invalid email or password.' });
     }
 
+    // Store user info in session
+    req.session.userId = user.id;
+    req.session.role = user.role;
+
     // Login successful — redirect based on role
     if (user.role === 'cook') {
-      res.redirect('/merchant-dashboard.html');
+      res.redirect('/merchant-dashboard');
     } else {
       res.redirect('/browse.html');
     }

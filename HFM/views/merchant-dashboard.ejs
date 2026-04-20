@@ -21,7 +21,7 @@
     </a>
     <div class="ms-auto d-flex align-items-center gap-3">
         <span style="font-family:'Poppins',sans-serif;font-size:0.9rem;color:rgba(255,255,255,.85);">
-            Welcome, Cook
+            Welcome, <%= user.firstName %>
         </span>
         <a href="/index.html" class="btn btn-sm" style="background:#fff;color:var(--burnt-orange-primary);font-family:'Poppins',sans-serif;font-weight:600;border-radius:20px;padding:4px 16px;">
             Log Out
@@ -69,7 +69,7 @@
                         <i class="bi bi-clock-history"></i>
                     </div>
                     <div>
-                        <div class="stat-num" id="stat-pending">2</div>
+                        <div class="stat-num" id="stat-pending"><%= pendingCount %></div>
                         <div class="stat-label">Pending Orders</div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         <i class="bi bi-check-circle"></i>
                     </div>
                     <div>
-                        <div class="stat-num" id="stat-confirmed">5</div>
+                        <div class="stat-num" id="stat-confirmed"><%= confirmedCount %></div>
                         <div class="stat-label">Confirmed Orders</div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                         <i class="bi bi-book"></i>
                     </div>
                     <div>
-                        <div class="stat-num" id="stat-menu">8</div>
+                        <div class="stat-num" id="stat-menu"><%= menuCount %></div>
                         <div class="stat-label">Menu Items</div>
                     </div>
                 </div>
