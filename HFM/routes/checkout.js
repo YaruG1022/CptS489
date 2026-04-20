@@ -82,4 +82,35 @@ router.post('/checkout', async function (req, res) {
   }
 });
 
+/* ══════════════════════════════════════════════
+   PAGE: GET /order-confirmation?orderId=<id>
+   ══════════════════════════════════════════════ */
+router.get('/order-confirmation', async function (req, res) {
+  try {
+    if (!req.session || !req.session.userId) return res.redirect('/login');
+
+    var user = await User.findByPk(req.session.userId);
+    var orderId = parseInt(req.query.orderId);
+
+    if (!orderId) return res.redirect('/browse');
+
+    var order = await Order.findOne({
+      where: { id: orderId, customerId: req.session.userId }
+    });
+
+    if (!order || order.status === 'pending') return res.redirect('/cart');
+
+    var restaurant = await Restaurant.findByPk(order.restaurantId);
+    var items = await OrderItem.findAll({
+      where: { orderId: order.id },
+      order: [['createdAt', 'ASC']]
+    });
+
+    res.render('order-confirmation', { user: user, order: order, restaurant: restaurant, items: items });
+  } catch (err) {
+    console.error(err);
+    res.redirect('/browse');
+  }
+});
+
 module.exports = router;
