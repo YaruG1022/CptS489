@@ -41,7 +41,7 @@
             </a>
         </nav>
         <div style="margin-top:auto;padding-bottom:12px;">
-            <a href="profile.html" class="sidebar-nav-link" id="sidebar-profile">
+            <a href="/profile" class="sidebar-nav-link" id="sidebar-profile">
                 <i class="bi bi-person-circle"></i>
                 <span>Profile</span>
             </a>
@@ -125,29 +125,18 @@
 
         <!-- Stat cards -->
         <div class="row g-3 mb-4">
-            <div class="col-6 col-md-4">
-                <div class="cust-stat-card" style="border-left:4px solid var(--burnt-orange-primary);">
-                    <div class="cust-stat-icon" style="background:rgba(197,90,58,.10);color:var(--burnt-orange-primary);">
-                        <i class="bi bi-clock-history"></i>
-                    </div>
-                    <div>
-                        <div class="stat-num" id="stat-pending"><%= pendingCount %></div>
-                        <div class="stat-label">Pending Orders</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4">
+            <div class="col-6 col-md-6">
                 <div class="cust-stat-card" style="border-left:4px solid var(--sage-green-secondary);">
                     <div class="cust-stat-icon" style="background:rgba(122,155,110,.10);color:var(--sage-green-secondary);">
                         <i class="bi bi-check-circle"></i>
                     </div>
                     <div>
-                        <div class="stat-num" id="stat-confirmed"><%= confirmedCount %></div>
-                        <div class="stat-label">Confirmed Orders</div>
+                        <div class="stat-num" id="stat-completed"><%= completedCount %></div>
+                        <div class="stat-label">Completed Orders</div>
                     </div>
                 </div>
             </div>
-            <div class="col-6 col-md-4">
+            <div class="col-6 col-md-6">
                 <div class="cust-stat-card" style="border-left:4px solid var(--golden-yellow-secondary);">
                     <div class="cust-stat-icon" style="background:rgba(232,180,74,.10);color:var(--golden-yellow-secondary);">
                         <i class="bi bi-book"></i>
@@ -166,9 +155,9 @@
                onclick="showSection('current-orders'); return false;">
                 <i class="bi bi-clock-history me-1"></i>Current Orders
             </a>
-            <a href="#" class="tab-btn" id="tab-all-orders"
-               onclick="showSection('all-orders'); return false;">
-                <i class="bi bi-receipt me-1"></i>All Orders
+            <a href="#" class="tab-btn" id="tab-completed-orders"
+               onclick="showSection('completed-orders'); return false;">
+                <i class="bi bi-check-circle me-1"></i>Completed Orders
             </a>
             <a href="#" class="tab-btn" id="tab-my-menu"
                onclick="showSection('my-menu'); return false;">

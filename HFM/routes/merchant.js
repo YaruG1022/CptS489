@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var { Op } = require('sequelize');
 var User = require('../models/User');
 var MenuItem = require('../models/MenuItem');
 var Restaurant = require('../models/Restaurant');
+var Order = require('../models/Order');
+var OrderItem = require('../models/OrderItem');
 
 /* Middleware: require logged-in cook */
 function requireCook(req, res, next) {
@@ -29,8 +32,7 @@ router.get('/merchant-dashboard', requireCook, async function (req, res) {
         restaurants: restaurants,
         restaurant: null,
         menuCount: 0,
-        pendingCount: 0,
-        confirmedCount: 0
+        completedCount: 0
       });
     }
 
@@ -49,14 +51,16 @@ router.get('/merchant-dashboard', requireCook, async function (req, res) {
       var menuCount = await MenuItem.count({
         where: { restaurantId: selectedRestaurant.id }
       });
+      var completedCount = await Order.count({
+        where: { restaurantId: selectedRestaurant.id, status: 'delivered' }
+      });
 
       return res.render('merchant-dashboard', {
         user: user,
         restaurants: restaurants,
         restaurant: selectedRestaurant,
         menuCount: menuCount,
-        pendingCount: 0,
-        confirmedCount: 0
+        completedCount: completedCount
       });
     }
 
@@ -66,8 +70,7 @@ router.get('/merchant-dashboard', requireCook, async function (req, res) {
       restaurants: restaurants,
       restaurant: null,
       menuCount: 0,
-      pendingCount: 0,
-      confirmedCount: 0
+      completedCount: 0
     });
   } catch (err) {
     console.error(err);
@@ -76,8 +79,7 @@ router.get('/merchant-dashboard', requireCook, async function (req, res) {
       restaurants: [],
       restaurant: null,
       menuCount: 0,
-      pendingCount: 0,
-      confirmedCount: 0
+      completedCount: 0
     });
   }
 });
@@ -117,6 +119,46 @@ router.get('/merchant-my-menu', requireCook, async function (req, res) {
   } catch (err) {
     console.error(err);
     res.render('merchant-my-menu', { items: [] });
+  }
+});
+
+/* GET /merchant-current-orders — EJS fragment: active orders for the selected restaurant */
+router.get('/merchant-current-orders', requireCook, async function (req, res) {
+  var restaurantId = req.session.restaurantId;
+  if (!restaurantId) return res.render('merchant-current-orders', { orders: [] });
+  try {
+    var orders = await Order.findAll({
+      where: { restaurantId: restaurantId, status: { [Op.in]: ['placed', 'confirmed', 'ready'] } },
+      order: [['createdAt', 'DESC']]
+    });
+    var ordersWithItems = await Promise.all(orders.map(async function (o) {
+      var items = await OrderItem.findByOrder(o.id);
+      return Object.assign(o.toJSON(), { items: items });
+    }));
+    res.render('merchant-current-orders', { orders: ordersWithItems });
+  } catch (err) {
+    console.error(err);
+    res.render('merchant-current-orders', { orders: [] });
+  }
+});
+
+/* GET /merchant-completed-orders — EJS fragment: completed orders for the selected restaurant */
+router.get('/merchant-completed-orders', requireCook, async function (req, res) {
+  var restaurantId = req.session.restaurantId;
+  if (!restaurantId) return res.render('merchant-completed-orders', { orders: [] });
+  try {
+    var orders = await Order.findAll({
+      where: { restaurantId: restaurantId, status: 'delivered' },
+      order: [['createdAt', 'DESC']]
+    });
+    var ordersWithItems = await Promise.all(orders.map(async function (o) {
+      var items = await OrderItem.findByOrder(o.id);
+      return Object.assign(o.toJSON(), { items: items });
+    }));
+    res.render('merchant-completed-orders', { orders: ordersWithItems });
+  } catch (err) {
+    console.error(err);
+    res.render('merchant-completed-orders', { orders: [] });
   }
 });
 
