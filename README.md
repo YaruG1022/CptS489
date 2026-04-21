@@ -1,20 +1,123 @@
-# HomePlate
-This is a web application made for a group project in CptS 489 (Web Development) at Washington State University. 
+# Home Food Marketplace
 
-This app centers on a food delivery/marketplace app similar to a conventional food delivery app, but with the premise that local vendors can list and sell homemade food to users. 
+Home Food Marketplace is a food marketplace web application for CptS 489 (Web Development) at Washington State University. Customers can browse local homemade food listings and place orders, while cooks (merchants) manage restaurants, menus, and order fulfillment.
 
-## Info
-CptS 489 - Spring 2026
-Washington State University 
+## Course Info
+- Course: CptS 489 - Spring 2026
+- Institution: Washington State University
 
-## Contributors 
-- Jacob Atwood
+## Contributors
 - Yaru Gao
-- Ingrid Llorente
 
-## How to run
-run `npm install` if you haven't already
+## Tech Stack
+- Backend: Node.js + Express
+- Templating: EJS
+- ORM: Sequelize
+- Database: MySQL
+- Language: JavaScript
 
+## Project Structure
+- Application root: `HFM/`
+- Server entry point: `HFM/bin/www`
+- Main app config: `HFM/app.js`
 
-### Helpful notes/scripts 
-`npm start` - starts the server
+## Prerequisites
+- Node.js 18+ (or newer LTS)
+- npm 9+
+- MySQL 8+ (or compatible MySQL server)
+
+## 1) Install Dependencies
+
+From repository root:
+
+```bash
+cd HFM
+npm install
+```
+
+## 2) Configure Environment Variables
+
+The app reads database settings from environment variables in `HFM/db.js`.
+
+Required/Supported variables:
+
+- `DB_NAME` (default: `homeplate`)
+- `DB_USER` (default: `root`)
+- `DB_PASS` (default: empty string)
+- `DB_HOST` (default: `127.0.0.1`)
+- `DB_PORT` (default: `3306`)
+- `SESSION_SECRET` (recommended; default exists for local dev only)
+
+Windows PowerShell example:
+
+```powershell
+$env:DB_NAME="homeplate"
+$env:DB_USER="root"
+$env:DB_PASS="your_password"
+$env:DB_HOST="127.0.0.1"
+$env:DB_PORT="3306"
+$env:SESSION_SECRET="replace_with_a_strong_secret"
+```
+
+macOS/Linux example:
+
+```bash
+export DB_NAME=homeplate
+export DB_USER=root
+export DB_PASS=your_password
+export DB_HOST=127.0.0.1
+export DB_PORT=3306
+export SESSION_SECRET=replace_with_a_strong_secret
+```
+
+## 3) Database Setup and Restore
+
+### Option A: Restore from SQL dump
+
+Create database:
+
+```sql
+CREATE DATABASE homeplate;
+```
+
+Restore dump (example):
+
+```bash
+mysql -u root -p homeplate < documentation/homeplate_dump.sql
+```
+
+### Option B (Local development only): Auto-sync schema
+
+If no dump is restored, the app runs `sequelize.sync({ alter: true })` on startup and creates/updates tables automatically. This is convenient for local development but dump restore is preferred for reproducible grading.
+
+## 4) Run the Application
+
+From `HFM/`:
+
+```bash
+npm start
+```
+
+If successful, server runs at:
+
+- `http://localhost:3000`
+
+## 5) Core User Roles and Flows
+- Customer:
+	- Register/login
+	- Browse restaurants and filter by tags
+	- Add items to cart and checkout
+	- View current order + order history
+- Cook (Merchant):
+	- Register/login as cook
+	- Create/select/delete restaurants
+	- Manage menu items and inventory
+	- View current/completed orders
+
+## Useful Scripts
+- `npm start`: start the Express server (`node ./bin/www`)
+
+## Troubleshooting
+- Port conflict (`Port 3000 is already in use`): stop existing process using port 3000, then restart.
+- DB connection failure: verify `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASS`, and that MySQL is running.
+- Login/session issues: set a non-empty `SESSION_SECRET` in your environment.
