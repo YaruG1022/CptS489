@@ -6,6 +6,7 @@ var MenuItem = require('../models/MenuItem');
 var Restaurant = require('../models/Restaurant');
 var Order = require('../models/Order');
 var OrderItem = require('../models/OrderItem');
+var sequelize = require('../db');
 
 /* Middleware: require logged-in cook */
 function requireCook(req, res, next) {
@@ -87,20 +88,88 @@ router.get('/merchant-dashboard', requireCook, async function (req, res) {
 /* POST /merchant-restaurant — create a new restaurant */
 router.post('/merchant-restaurant', requireCook, async function (req, res) {
   try {
-    var { name, address } = req.body;
+    var { name, address, tags } = req.body;
     if (!name || !address) {
       return res.redirect('/merchant-dashboard');
     }
+    
+    // Parse tags: split by comma and trim
+    var tagsList = [];
+    if (tags && typeof tags === 'string') {
+      tagsList = tags.split(',')
+        .map(function(t) { return t.trim().toLowerCase(); })
+        .filter(function(t) { return t.length > 0; });
+    }
+    
     var restaurant = await Restaurant.create({
       name: name.trim(),
       address: address.trim(),
-      userId: req.session.userId
+      userId: req.session.userId,
+      tags: tagsList
     });
     req.session.restaurantId = restaurant.id;
     res.redirect('/merchant-dashboard?r=' + restaurant.id);
   } catch (err) {
     console.error(err);
     res.redirect('/merchant-dashboard');
+  }
+});
+
+/* POST /merchant-restaurant/delete — delete a restaurant owned by current cook */
+router.post('/merchant-restaurant/delete', requireCook, async function (req, res) {
+  var restaurantId = req.body.restaurantId;
+  if (!restaurantId) {
+    return res.redirect('/merchant-dashboard?switch=1');
+  }
+
+  try {
+    var restaurant = await Restaurant.findOne({
+      where: { id: restaurantId, userId: req.session.userId }
+    });
+
+    if (!restaurant) {
+      return res.redirect('/merchant-dashboard?switch=1');
+    }
+
+    await sequelize.transaction(async function (t) {
+      var orders = await Order.findAll({
+        where: { restaurantId: restaurant.id },
+        attributes: ['id'],
+        transaction: t
+      });
+
+      var orderIds = orders.map(function (o) { return o.id; });
+      if (orderIds.length > 0) {
+        await OrderItem.destroy({
+          where: { orderId: { [Op.in]: orderIds } },
+          transaction: t
+        });
+      }
+
+      await Order.destroy({
+        where: { restaurantId: restaurant.id },
+        transaction: t
+      });
+
+      await MenuItem.destroy({
+        where: { restaurantId: restaurant.id },
+        transaction: t
+      });
+
+      await Restaurant.destroy({
+        where: { id: restaurant.id, userId: req.session.userId },
+        transaction: t
+      });
+    });
+
+    if (String(req.session.restaurantId || '') === String(restaurantId)) {
+      delete req.session.restaurantId;
+    }
+
+    res.redirect('/merchant-dashboard?switch=1');
+  } catch (err) {
+    console.error(err);
+    res.redirect('/merchant-dashboard?switch=1');
   }
 });
 

@@ -49,6 +49,20 @@
     </form>
 </div>
 
+<!-- Tag Filter Section -->
+<% var activeTag = (typeof selectedTag !== 'undefined' && selectedTag) ? selectedTag : ''; %>
+<% var tagList = Array.isArray(availableTags) ? availableTags : []; %>
+<div class="browse-tag-strip-wrap">
+    <div class="browse-tag-strip">
+        <a href="/browse" class="filter-pill <%= !activeTag ? 'active' : '' %>">
+            <i class="bi bi-grid-3x3-gap-fill"></i>All
+        </a>
+        <% tagList.forEach(function(tag) { %>
+        <a href="/browse?tag=<%= encodeURIComponent(tag) %>" class="filter-pill <%= activeTag === tag ? 'active' : '' %>"><%= tag.charAt(0).toUpperCase() + tag.slice(1) %></a>
+        <% }); %>
+    </div>
+</div>
+
 <!-- Main Content -->
 <div class="browse-page">
 
@@ -60,6 +74,13 @@
             </h3>
             <a href="/browse" style="font-family:'Poppins',sans-serif;font-size:0.85rem;color:#888;text-decoration:none;">
                 <i class="bi bi-x me-1"></i>Clear Search
+            </a>
+            <% } else if (activeTag) { %>
+            <h3 class="browse-section-title mb-0">
+                <i class="bi bi-tag me-1"></i><%= restaurants.length %> restaurant<%= restaurants.length !== 1 ? 's' : '' %> tagged with <strong><%= activeTag %></strong>
+            </h3>
+            <a href="/browse" style="font-family:'Poppins',sans-serif;font-size:0.85rem;color:#888;text-decoration:none;">
+                <i class="bi bi-x me-1"></i>Clear Filter
             </a>
             <% } else { %>
             <h3 class="browse-section-title mb-0">
@@ -87,7 +108,9 @@
         <div class="row g-3">
             <% restaurants.forEach(function(r) { %>
             <div class="col-6 col-md-4 col-lg-3">
-                <a href="/restaurant-detail?id=<%= r.id %>" class="restaurant-card">
+                <div class="restaurant-card" role="link" tabindex="0"
+                     onclick="window.location.href='/restaurant-detail?id=<%= r.id %>'"
+                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='/restaurant-detail?id=<%= r.id %>';}">
                     <div class="restaurant-card-img" style="background:<%= r.bgColor %>;display:flex;align-items:center;justify-content:center;">
                         <i class="bi bi-shop" style="font-size:40px;color:var(--burnt-orange-primary);opacity:0.3;"></i>
                     </div>
@@ -96,12 +119,21 @@
                         <div class="restaurant-card-meta">
                             <i class="bi bi-geo-alt me-1"></i><%= r.address %>
                         </div>
+                        <% if (r.tags && r.tags.length > 0) { %>
+                        <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px;">
+                            <% r.tags.forEach(function(tag) { %>
+                            <a href="/browse?tag=<%= encodeURIComponent(tag) %>" onclick="event.stopPropagation();" class="badge" style="background-color:var(--burnt-orange-primary);color:#fff;text-decoration:none;font-size:0.7rem;padding:3px 8px;cursor:pointer;text-transform:capitalize;">
+                                <%= tag %>
+                            </a>
+                            <% }); %>
+                        </div>
+                        <% } %>
                         <div class="restaurant-card-footer">
                             <span><i class="bi bi-book me-1"></i><%= r.menuCount %> item<%= r.menuCount !== 1 ? 's' : '' %></span>
                             <span><i class="bi bi-person-circle me-1"></i><%= r.ownerName %></span>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
             <% }); %>
         </div>

@@ -15,6 +15,22 @@ Restaurant.init({
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  tags: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    defaultValue: '[]',
+    get() {
+      const val = this.getDataValue('tags');
+      try {
+        return typeof val === 'string' ? JSON.parse(val) : (val || []);
+      } catch {
+        return [];
+      }
+    },
+    set(val) {
+      this.setDataValue('tags', JSON.stringify(Array.isArray(val) ? val : []));
+    }
   }
 }, {
   sequelize,
