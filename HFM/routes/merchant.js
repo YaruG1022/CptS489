@@ -197,8 +197,9 @@ router.get('/merchant-current-orders', requireCook, async function (req, res) {
   if (!restaurantId) return res.render('merchant-current-orders', { orders: [] });
   try {
     var orders = await Order.findAll({
-      where: { restaurantId: restaurantId, status: { [Op.in]: ['placed', 'confirmed', 'ready'] } },
-      order: [['createdAt', 'DESC']]
+      where: { restaurantId: restaurantId, status: { [Op.ne]: 'pending' } },
+      order: [['createdAt', 'DESC']],
+      limit: 1
     });
     var ordersWithItems = await Promise.all(orders.map(async function (o) {
       var items = await OrderItem.findByOrder(o.id);

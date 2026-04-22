@@ -6,12 +6,10 @@
     <% if (orders.length === 0) { %>
     <div class="text-center py-5" style="color:#bbb;font-family:'Poppins',sans-serif;">
         <i class="bi bi-inbox" style="font-size:2.5rem;display:block;margin-bottom:8px;"></i>
-        <div style="font-size:0.88rem;">No active orders at the moment.</div>
+        <div style="font-size:0.88rem;">No recent orders at the moment.</div>
     </div>
     <% } else { %>
-    <p style="font-family:'Open Sans',sans-serif;font-size:0.85rem;color:#888;margin-bottom:20px;">
-        <%= orders.length %> active order<%= orders.length !== 1 ? 's' : '' %>
-    </p>
+    <p style="font-family:'Open Sans',sans-serif;font-size:0.85rem;color:#888;margin-bottom:20px;">Showing the most recent order.</p>
 
     <% orders.forEach(function(order) {
        var customerName = (order.deliveryFirstName || '') + (order.deliveryLastName ? ' ' + order.deliveryLastName.charAt(0) + '.' : '');
@@ -37,6 +35,10 @@
                 <span class="badge bg-primary">Confirmed</span>
                 <% } else if (order.status === 'ready') { %>
                 <span class="badge bg-info text-dark">Ready</span>
+                <% } else if (order.status === 'delivered') { %>
+                <span class="badge bg-success">Delivered</span>
+                <% } else if (order.status === 'cancelled') { %>
+                <span class="badge bg-danger">Cancelled</span>
                 <% } %>
                 <i class="bi bi-chevron-down history-chevron"></i>
             </div>

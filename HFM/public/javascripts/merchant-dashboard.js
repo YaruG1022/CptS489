@@ -5,6 +5,7 @@ const sectionFiles = {
 };
 
 var activeSection = null;
+var currentOrdersRefreshTimer = null;
 var myMenuRefreshTimer = null;
 
 function clearSection() {
@@ -35,6 +36,37 @@ function stopMyMenuAutoRefresh() {
     }
 }
 
+function stopCurrentOrdersAutoRefresh() {
+    if (currentOrdersRefreshTimer) {
+        clearInterval(currentOrdersRefreshTimer);
+        currentOrdersRefreshTimer = null;
+    }
+}
+
+function startCurrentOrdersAutoRefresh() {
+    stopCurrentOrdersAutoRefresh();
+    if (activeSection !== 'current-orders') return;
+
+    currentOrdersRefreshTimer = setInterval(function () {
+        if (activeSection !== 'current-orders') return;
+
+        fetch(sectionFiles['current-orders'])
+            .then(function (r) {
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return r.text();
+            })
+            .then(function (html) {
+                if (activeSection !== 'current-orders') return;
+                var container = document.getElementById('section-content');
+                container.innerHTML = html;
+                runEmbeddedScripts(container);
+            })
+            .catch(function () {
+                // Keep UI stable on background refresh failures.
+            });
+    }, 2000);
+}
+
 function startMyMenuAutoRefresh() {
     stopMyMenuAutoRefresh();
     if (activeSection !== 'my-menu') return;
@@ -63,6 +95,7 @@ function startMyMenuAutoRefresh() {
 
 function showSection(section) {
     activeSection = section;
+    stopCurrentOrdersAutoRefresh();
     stopMyMenuAutoRefresh();
     setActiveTab(section);
     clearSection();
@@ -77,6 +110,7 @@ function showSection(section) {
             var container = document.getElementById('section-content');
             container.innerHTML = html;
             runEmbeddedScripts(container);
+            if (section === 'current-orders') startCurrentOrdersAutoRefresh();
             if (section === 'my-menu') startMyMenuAutoRefresh();
         })
         .catch(function(err) {
@@ -90,5 +124,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 window.addEventListener('beforeunload', function () {
+    stopCurrentOrdersAutoRefresh();
     stopMyMenuAutoRefresh();
 });
