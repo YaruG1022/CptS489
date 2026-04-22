@@ -29,6 +29,12 @@ function parseNonNegativeInteger(value) {
   return parsed;
 }
 
+function parsePositiveInteger(value) {
+  var parsed = parseNonNegativeInteger(value);
+  if (parsed == null || parsed < 1) return null;
+  return parsed;
+}
+
 /* GET /api/menu — list menu items for the selected restaurant */
 router.get('/menu', requireCook, async function (req, res) {
   try {
@@ -99,9 +105,9 @@ router.put('/menu/:id', requireCook, async function (req, res) {
       item.price = parsedPrice;
     }
     if (quantity != null) {
-      var parsedQuantity = parseNonNegativeInteger(quantity);
+      var parsedQuantity = parsePositiveInteger(quantity);
       if (parsedQuantity == null) {
-        return res.status(400).json({ error: 'Quantity must be a non-negative integer.' });
+        return res.status(400).json({ error: 'Quantity must be a positive integer greater than 0.' });
       }
       item.quantity = parsedQuantity;
     }
