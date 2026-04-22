@@ -3,13 +3,9 @@ const navbar =
 <!-- navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a href="/index.html" class="navbar-brand">
+            <a href="/" class="navbar-brand">
                 <img id="navbar-logo-img" src="/images/homeplate-logo-transparent.png" alt="">
-                <h1 id="navbar-header-text">HomePlate</h1>
-            </a>
-
-            <a class="nav-item nav-link m-2" id="logout-nav-button" href="/merchant-dashboard">
-                Dashboard Demo
+                <h1 id="navbar-header-text">Home Food Marketplace</h1>
             </a>
         </div>
     </nav>

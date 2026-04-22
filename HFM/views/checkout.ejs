@@ -18,7 +18,7 @@
 <nav class="navbar navbar-expand-lg" style="background-color:var(--burnt-orange-primary);padding:0 1.5rem;">
     <% var dashboardUrl = (user && user.role === 'cook') ? '/merchant-dashboard' : '/customer-dashboard'; %>
     <% var browseUrl = (user && user.role === 'cook') ? '/merchant-dashboard' : '/browse'; %>
-    <a class="navbar-brand" href="<%= browseUrl %>" style="font-family:'Pacifico',cursive;color:#fff;font-size:1.7rem;letter-spacing:.02em;">HomePlate</a>
+    <a class="navbar-brand" href="/" style="font-family:'Pacifico',cursive;color:#fff;font-size:1.7rem;letter-spacing:.02em;">Home Food Marketplace</a>
     <div class="ms-auto d-flex align-items-center gap-3">
         <a href="<%= browseUrl %>" class="btn btn-sm"
            style="background:rgba(255,255,255,.15);color:#fff;font-family:'Poppins',sans-serif;font-size:0.85rem;border-radius:20px;padding:4px 14px;border:1px solid rgba(255,255,255,.3);">
