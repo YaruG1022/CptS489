@@ -9,6 +9,9 @@ Home Food Marketplace is a food marketplace web application for CptS 489 (Web De
 ## Contributors
 - Yaru Gao
 
+## GitHub Repo
+https://github.com/YaruG1022/CptS489.git
+
 ## Tech Stack
 - Backend: Node.js + Express
 - Templating: EJS
@@ -59,6 +62,12 @@ $env:DB_PORT="3306"
 $env:SESSION_SECRET="replace_with_a_strong_secret"
 ```
 
+For the provided Docker container `mysql-hfm`, use an empty DB password:
+
+```powershell
+$env:DB_PASS=""
+```
+
 macOS/Linux example:
 
 ```bash
@@ -72,6 +81,11 @@ export SESSION_SECRET=replace_with_a_strong_secret
 
 ## 3) Database Setup and Restore
 
+Dump file info (for submission/review):
+- File: `documentation/homeplate_dump.sql`
+- Source DB: `homeplate` (MySQL 8 in Docker container `mysql-hfm`)
+- Generated: 2026-04-21
+
 ### Option A: Restore from SQL dump
 
 Create database:
@@ -84,6 +98,12 @@ Restore dump (example):
 
 ```bash
 mysql -u root -p homeplate < documentation/homeplate_dump.sql
+```
+
+If you are using Docker MySQL (same setup as this project), you can restore with:
+
+```powershell
+Get-Content documentation/homeplate_dump.sql | docker exec -i mysql-hfm mysql -uroot homeplate
 ```
 
 ### Option B (Local development only): Auto-sync schema
