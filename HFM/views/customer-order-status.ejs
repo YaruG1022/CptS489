@@ -65,3 +65,28 @@
 
     <% } %>
 </div>
+
+<% if (order && order.status === 'delivered') { %>
+<script>
+(function () {
+    // Stop the 5-second auto-refresh so it doesn't re-render the delivered order
+    // and overwrite the 3-second countdown.
+    if (typeof stopCurrentOrderAutoRefresh === 'function') {
+        stopCurrentOrderAutoRefresh();
+    }
+    setTimeout(function () {
+        var container = document.getElementById('section-content');
+        if (!container) return;
+        container.innerHTML =
+            '<div class="section-card">' +
+            '<h2 class="section-title"><i class="bi bi-clock-history me-2"></i>Current Order</h2>' +
+            '<div class="text-center py-5" style="color:#bbb;font-family:\'Poppins\',sans-serif;">' +
+            '<i class="bi bi-bag-x" style="font-size:2.5rem;display:block;margin-bottom:8px;"></i>' +
+            '<div style="font-size:0.88rem;">You have no recent orders.</div>' +
+            '<a href="/browse" class="btn btn-hp mt-3" style="font-size:0.85rem;">' +
+            '<i class="bi bi-search me-1"></i>Browse Restaurants</a>' +
+            '</div></div>';
+    }, 3000);
+})();
+</script>
+<% } %>

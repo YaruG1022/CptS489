@@ -6,7 +6,7 @@ var OrderItem = require('../models/OrderItem');
 var Restaurant = require('../models/Restaurant');
 var MenuItem = require('../models/MenuItem');
 
-var AUTO_DELIVER_DELAY_MS = 10000;
+var AUTO_DELIVER_DELAY_MS = 5000;
 
 var STATE_NAME_TO_CODE = {
   alabama: 'AL', alaska: 'AK', arizona: 'AZ', arkansas: 'AR', california: 'CA',
