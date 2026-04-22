@@ -53,8 +53,8 @@ router.get('/menu', requireCook, async function (req, res) {
 router.post('/menu', requireCook, async function (req, res) {
   try {
     var { name, price, quantity, category, description } = req.body;
-    if (!name || price == null) {
-      return res.status(400).json({ error: 'Name and price are required.' });
+    if (!name || price == null || quantity == null || String(quantity).trim() === '') {
+      return res.status(400).json({ error: 'Name, price, and quantity are required.' });
     }
 
     var parsedPrice = parseNonNegativePrice(price);
@@ -62,12 +62,9 @@ router.post('/menu', requireCook, async function (req, res) {
       return res.status(400).json({ error: 'Price must be a non-negative number.' });
     }
 
-    var parsedQuantity = 0;
-    if (quantity != null && String(quantity).trim() !== '') {
-      parsedQuantity = parseNonNegativeInteger(quantity);
-      if (parsedQuantity == null) {
-        return res.status(400).json({ error: 'Quantity must be a non-negative integer.' });
-      }
+    var parsedQuantity = parsePositiveInteger(quantity);
+    if (parsedQuantity == null) {
+      return res.status(400).json({ error: 'Quantity must be a positive integer greater than 0.' });
     }
 
     var item = await MenuItem.create({
