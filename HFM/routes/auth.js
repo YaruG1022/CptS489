@@ -68,9 +68,11 @@ router.post('/login', async function (req, res) {
 
     // Login successful — redirect based on role
     if (user.role === 'cook') {
+      // Always force restaurant selection after merchant login.
+      delete req.session.restaurantId;
       res.redirect('/merchant-dashboard');
     } else {
-      res.redirect('/customer-dashboard');
+      res.redirect('/browse');
     }
   } catch (err) {
     console.error(err);
