@@ -29,6 +29,26 @@ https://github.com/YaruG1022/CptS489.git
 - npm 9+
 - MySQL 8+ (or compatible MySQL server)
 
+## 0) (Optional) Create MySQL Docker Container
+
+If you do not have a local MySQL server, create one with Docker:
+
+```powershell
+docker run --name mysql-hfm -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=homeplate -p 3306:3306 -d mysql:8
+```
+
+Check container status:
+
+```powershell
+docker ps
+```
+
+If container already exists but is stopped:
+
+```powershell
+docker start mysql-hfm
+```
+
 ## 1) Install Dependencies
 
 From repository root:
@@ -121,6 +141,26 @@ npm start
 If successful, server runs at:
 
 - `http://localhost:3000`
+
+## Quick Start (Docker + PowerShell)
+
+Use this shortest command flow for the Docker MySQL setup in this repository:
+
+```powershell
+docker start mysql-hfm
+cd HFM
+npm install
+$env:DB_NAME="homeplate"
+$env:DB_USER="root"
+$env:DB_PASS=""
+$env:DB_HOST="127.0.0.1"
+$env:DB_PORT="3306"
+$env:SESSION_SECRET="replace_with_a_strong_secret"
+cd ..
+Get-Content documentation/homeplate_dump.sql | docker exec -i mysql-hfm mysql -uroot homeplate
+cd HFM
+npm start
+```
 
 ## 5) Core User Roles and Flows
 - Customer:
