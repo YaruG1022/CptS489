@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var { Op } = require('sequelize');
 var MenuItem = require('../models/MenuItem');
 var Restaurant = require('../models/Restaurant');
 
@@ -35,6 +36,29 @@ function parsePositiveInteger(value) {
   return parsed;
 }
 
+function normalizeMenuItemName(value) {
+  if (typeof value !== 'string') return null;
+  var normalized = value.trim();
+  return normalized || null;
+}
+
+async function hasDuplicateMenuItemName(restaurantId, name, excludeId) {
+  var normalizedName = normalizeMenuItemName(name);
+  if (!normalizedName) return false;
+
+  var where = {
+    restaurantId: restaurantId,
+    name: normalizedName
+  };
+
+  if (excludeId != null) {
+    where.id = { [Op.ne]: excludeId };
+  }
+
+  var existingItem = await MenuItem.findOne({ where: where });
+  return !!existingItem;
+}
+
 /* GET /api/menu — list menu items for the selected restaurant */
 router.get('/menu', requireCook, async function (req, res) {
   try {
@@ -57,6 +81,15 @@ router.post('/menu', requireCook, async function (req, res) {
       return res.status(400).json({ error: 'Name, price, and quantity are required.' });
     }
 
+    var normalizedName = normalizeMenuItemName(name);
+    if (!normalizedName) {
+      return res.status(400).json({ error: 'Name is required.' });
+    }
+
+    if (await hasDuplicateMenuItemName(req.session.restaurantId, normalizedName)) {
+      return res.status(400).json({ error: 'A menu item with that name already exists for this restaurant.' });
+    }
+
     var parsedPrice = parseNonNegativePrice(price);
     if (parsedPrice == null) {
       return res.status(400).json({ error: 'Price must be a non-negative number.' });
@@ -68,7 +101,7 @@ router.post('/menu', requireCook, async function (req, res) {
     }
 
     var item = await MenuItem.create({
-      name: name,
+      name: normalizedName,
       price: parsedPrice,
       quantity: parsedQuantity,
       category: category || null,
@@ -93,7 +126,16 @@ router.put('/menu/:id', requireCook, async function (req, res) {
       return res.status(404).json({ error: 'Menu item not found.' });
     }
     var { name, price, quantity, category, description } = req.body;
-    if (name != null) item.name = name;
+    if (name != null) {
+      var normalizedName = normalizeMenuItemName(name);
+      if (!normalizedName) {
+        return res.status(400).json({ error: 'Name is required.' });
+      }
+      if (await hasDuplicateMenuItemName(req.session.restaurantId, normalizedName, item.id)) {
+        return res.status(400).json({ error: 'A menu item with that name already exists for this restaurant.' });
+      }
+      item.name = normalizedName;
+    }
     if (price != null) {
       var parsedPrice = parseNonNegativePrice(price);
       if (parsedPrice == null) {
