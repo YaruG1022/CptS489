@@ -14,6 +14,21 @@ function requireCook(req, res, next) {
   next();
 }
 
+function parseNonNegativePrice(value) {
+  var parsed = Number(value);
+  if (!Number.isFinite(parsed)) return null;
+  if (parsed < 0) return null;
+  return parsed;
+}
+
+function parseNonNegativeInteger(value) {
+  var raw = String(value).trim();
+  if (!/^\d+$/.test(raw)) return null;
+  var parsed = Number(raw);
+  if (!Number.isInteger(parsed) || parsed < 0) return null;
+  return parsed;
+}
+
 /* GET /api/menu — list menu items for the selected restaurant */
 router.get('/menu', requireCook, async function (req, res) {
   try {
@@ -35,10 +50,24 @@ router.post('/menu', requireCook, async function (req, res) {
     if (!name || price == null) {
       return res.status(400).json({ error: 'Name and price are required.' });
     }
+
+    var parsedPrice = parseNonNegativePrice(price);
+    if (parsedPrice == null) {
+      return res.status(400).json({ error: 'Price must be a non-negative number.' });
+    }
+
+    var parsedQuantity = 0;
+    if (quantity != null && String(quantity).trim() !== '') {
+      parsedQuantity = parseNonNegativeInteger(quantity);
+      if (parsedQuantity == null) {
+        return res.status(400).json({ error: 'Quantity must be a non-negative integer.' });
+      }
+    }
+
     var item = await MenuItem.create({
       name: name,
-      price: parseFloat(price),
-      quantity: parseInt(quantity) || 0,
+      price: parsedPrice,
+      quantity: parsedQuantity,
       category: category || null,
       description: description || null,
       userId: req.session.userId,
@@ -62,8 +91,20 @@ router.put('/menu/:id', requireCook, async function (req, res) {
     }
     var { name, price, quantity, category, description } = req.body;
     if (name != null) item.name = name;
-    if (price != null) item.price = parseFloat(price);
-    if (quantity != null) item.quantity = parseInt(quantity);
+    if (price != null) {
+      var parsedPrice = parseNonNegativePrice(price);
+      if (parsedPrice == null) {
+        return res.status(400).json({ error: 'Price must be a non-negative number.' });
+      }
+      item.price = parsedPrice;
+    }
+    if (quantity != null) {
+      var parsedQuantity = parseNonNegativeInteger(quantity);
+      if (parsedQuantity == null) {
+        return res.status(400).json({ error: 'Quantity must be a non-negative integer.' });
+      }
+      item.quantity = parsedQuantity;
+    }
     if (category !== undefined) item.category = category || null;
     if (description !== undefined) item.description = description || null;
     await item.save();
