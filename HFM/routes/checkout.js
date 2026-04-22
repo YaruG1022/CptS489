@@ -34,6 +34,17 @@ function normalizeState(value) {
   return raw.slice(0, 2).toUpperCase();
 }
 
+function cleanRequired(value) {
+  if (typeof value !== 'string') return '';
+  return value.trim();
+}
+
+function cleanOptional(value) {
+  if (typeof value !== 'string') return null;
+  var trimmed = value.trim();
+  return trimmed || null;
+}
+
 function scheduleAutoDeliver(orderId) {
   setTimeout(async function () {
     try {
@@ -104,6 +115,19 @@ router.post('/checkout', async function (req, res) {
 
     if (!orderId) return res.redirect('/cart');
 
+    var deliveryFirstName = cleanRequired(req.body.deliveryFirstName);
+    var deliveryLastName = cleanRequired(req.body.deliveryLastName);
+    var deliveryStreet = cleanRequired(req.body.deliveryStreet);
+    var deliveryCity = cleanRequired(req.body.deliveryCity);
+    var deliveryZip = cleanRequired(req.body.deliveryZip);
+    var deliveryPhone = cleanRequired(req.body.deliveryPhone);
+    var deliveryApt = cleanOptional(req.body.deliveryApt);
+    var deliveryNotes = cleanOptional(req.body.deliveryNotes);
+
+    if (!deliveryFirstName || !deliveryLastName || !deliveryStreet || !deliveryCity || !deliveryZip || !deliveryPhone) {
+      return res.redirect('/checkout?orderId=' + orderId + '&error=' + encodeURIComponent('Please provide complete address details (name, street, city, state, ZIP, and phone).'));
+    }
+
     var normalizedState = normalizeState(req.body.deliveryState);
     if (!normalizedState) {
       return res.redirect('/checkout?orderId=' + orderId + '&error=' + encodeURIComponent('Please provide a valid state.'));
@@ -168,15 +192,15 @@ router.post('/checkout', async function (req, res) {
       }
 
       /* Save delivery info */
-      order.deliveryFirstName = req.body.deliveryFirstName;
-      order.deliveryLastName = req.body.deliveryLastName;
-      order.deliveryStreet = req.body.deliveryStreet;
-      order.deliveryApt = req.body.deliveryApt || null;
-      order.deliveryCity = req.body.deliveryCity;
+      order.deliveryFirstName = deliveryFirstName;
+      order.deliveryLastName = deliveryLastName;
+      order.deliveryStreet = deliveryStreet;
+      order.deliveryApt = deliveryApt;
+      order.deliveryCity = deliveryCity;
       order.deliveryState = normalizedState;
-      order.deliveryZip = req.body.deliveryZip;
-      order.deliveryPhone = req.body.deliveryPhone;
-      order.deliveryNotes = req.body.deliveryNotes || null;
+      order.deliveryZip = deliveryZip;
+      order.deliveryPhone = deliveryPhone;
+      order.deliveryNotes = deliveryNotes;
       order.fulfillment = req.body.fulfillment || 'delivery';
 
       /* Change status from pending to placed */
