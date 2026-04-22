@@ -87,15 +87,23 @@ router.put('/profile/address', requireLogin, async function (req, res) {
     var user = await User.findByPk(req.session.userId);
     if (!user) return res.status(404).json({ error: 'User not found' });
 
-    var state = cleanString(req.body.state, 2);
-    if (state) state = state.toUpperCase();
+    var street = cleanString(req.body.street, 255);
+    var city   = cleanString(req.body.city, 100);
+    var state  = cleanString(req.body.state, 2);
+    var zip    = cleanString(req.body.zip, 10);
+
+    if (!street || !city || !state || !zip) {
+      return res.status(400).json({ error: 'Street, city, state, and zip are required to update your address.' });
+    }
+
+    state = state.toUpperCase();
 
     await user.update({
-      street: cleanString(req.body.street, 255),
+      street: street,
       suite: cleanString(req.body.suite, 100),
-      city: cleanString(req.body.city, 100),
+      city: city,
       state: state,
-      zip: cleanString(req.body.zip, 10)
+      zip: zip
     });
 
     return res.json({ ok: true, profile: toProfileDto(user) });
